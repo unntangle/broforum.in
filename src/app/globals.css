@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-dark: #010755;
+  --color-brand-light: #035db3;
+  --color-brand-accent: #03adad;
+  --color-blue-900: #010755;
+  --color-blue-600: #035db3;
+  --font-sans: var(--font-source-sans);
+  --font-mono: var(--font-source-sans);
+}
+
+:root {
+  --background: #f8fafc; /* slate-50 to match hero section */
+  --foreground: #171717;
+}
+
+/* Dark mode overrides removed to keep site always light-themed */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+/* Custom Gradients */
+@utility bg-gradient-brand {
+  background-image: linear-gradient(to right, var(--color-brand-dark), var(--color-brand-light));
+}
+@utility text-gradient-brand {
+  background-image: linear-gradient(to right, var(--color-brand-dark), var(--color-brand-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility grid-cols-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
