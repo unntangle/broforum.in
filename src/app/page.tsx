@@ -35,6 +35,42 @@ const members = [
   { name: "Mr. A. Perumal", business: "V for U Financial", category: "Loans", initials: "AP" },
 ];
 
+const testimonials = [
+  { quote: "BRO Forum changed the way I do business. Within 3 months I had more referrals than I'd received in the previous 2 years combined.", name: "Mr. M. Ravi", business: "VTECH O-MATE Solar", category: "Solar Power", initials: "MR" },
+  { quote: "The structured format ensures every meeting counts. I've built genuine business relationships that have directly grown my revenue.", name: "Mr. G. Subramani", business: "SJ Window", category: "UPVC Windows", initials: "GS" },
+  { quote: "One seat per category is a game changer. I'm the only loans expert in the room — every referral comes to me.", name: "Mr. A. Perumal", business: "V for U Financial", category: "Loans", initials: "AP" },
+  { quote: "I was skeptical at first, but BRO Forum delivered. My pest control business grew 40% in the first year from referrals alone.", name: "Mr. R. Deenadhayalan", business: "Classical Pest Control", category: "Pest Control", initials: "RD" },
+];
+
+const testimonialsRow2 = [
+  { quote: "As a photographer, word-of-mouth is everything. BRO Forum gave me a structured way to get referrals every single week.", name: "Mr. Vinoth Suren Raj", business: "Fotophactory", category: "Photography", initials: "VS" },
+  { quote: "The accountability built into every meeting is what sets BRO Forum apart. Members genuinely care about your success.", name: "Mr. G. Sathish", business: "Oli Av Tech", category: "Home Automation", initials: "GS" },
+  { quote: "I've been a member for 3 years. The relationships I've built here have become the backbone of my business network.", name: "Mr. P. Manohar", business: "Aqua Eco Green Tech", category: "Pumps", initials: "PM" },
+  { quote: "BRO Forum is not just networking — it's a business growth system. Every Thursday I leave with real leads.", name: "Mr. Sakthivel N", business: "Growth Way Developers", category: "Real Estate", initials: "SN" },
+];
+
+function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
+  return (
+    <div
+      className="shrink-0 w-[320px] bg-white/8 hover:bg-white/15 border border-white/10 hover:border-[#01acac]/40 rounded-2xl p-6 flex flex-col justify-between gap-5 transition-all duration-300 cursor-default"
+    >
+      <div>
+        <div className="text-[#01acac] text-3xl font-black leading-none mb-3">&ldquo;</div>
+        <p className="text-white/85 text-sm leading-relaxed">{t.quote}</p>
+      </div>
+      <div className="flex items-center gap-3 pt-2 border-t border-white/10">
+        <div className="w-10 h-10 rounded-full bg-[#01acac]/20 border border-[#01acac]/30 flex items-center justify-center shrink-0">
+          <span className="text-[#01acac] font-black text-xs">{t.initials}</span>
+        </div>
+        <div>
+          <p className="text-white font-bold text-sm">{t.name}</p>
+          <p className="text-white/50 text-xs">{t.category} · {t.business}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function getNextThursday(): string {
   const now = new Date();
   const ist = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
@@ -350,28 +386,62 @@ export default function Home() {
         `}</style>
       </section>
 
-      {/* ── Testimonial ── */}
-      <section className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-gradient-to-br from-[#002284] to-[#003399] rounded-3xl p-10 md:p-16 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)`, backgroundSize: "24px 24px" }} />
-            <div className="relative text-center space-y-6">
-              <div className="text-[#01acac] text-6xl font-black leading-none">"</div>
-              <p className="text-white text-2xl md:text-3xl font-bold leading-relaxed max-w-3xl mx-auto">
-                BRO Forum changed the way I do business. Within 3 months I had more referrals than I'd received in the previous 2 years combined.
-              </p>
-              <div className="pt-4">
-                <div className="w-12 h-12 rounded-full bg-[#01acac] flex items-center justify-center mx-auto mb-3 text-white font-black">MR</div>
-                <p className="text-white font-bold">Mr. M. Ravi</p>
-                <p className="text-white/60 text-sm">VTECH O-MATE Solar · BRO Forum Member</p>
-              </div>
-            </div>
+      {/* ── Testimonials ── */}
+      <section className="py-20 bg-[#002284] overflow-hidden relative">
+        {/* Dot pattern */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px)`, backgroundSize: "28px 28px" }} />
+
+        <div className="relative max-w-7xl mx-auto px-6 text-center mb-12">
+          <span className="text-[#01acac] font-bold uppercase tracking-widest text-xs">Member Stories</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">What Our Members Say</h2>
+        </div>
+
+        {/* Row 1 — scrolls left */}
+        <div className="relative mb-4">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#002284] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#002284] to-transparent z-10 pointer-events-none" />
+          <div
+            className="flex gap-4"
+            style={{ animation: "scroll-left 35s linear infinite", width: "max-content" }}
+            onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
+            onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
+          >
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <TestimonialCard key={i} t={t} />
+            ))}
           </div>
         </div>
+
+        {/* Row 2 — scrolls right */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#002284] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#002284] to-transparent z-10 pointer-events-none" />
+          <div
+            className="flex gap-4"
+            style={{ animation: "scroll-right 40s linear infinite", width: "max-content" }}
+            onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
+            onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
+          >
+            {[...testimonialsRow2, ...testimonialsRow2].map((t, i) => (
+              <TestimonialCard key={i} t={t} />
+            ))}
+          </div>
+        </div>
+
+        <style jsx global>{`
+          @keyframes scroll-left {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          @keyframes scroll-right {
+            0%   { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+          }
+        `}</style>
       </section>
 
       {/* ── Final CTA ── */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-10 bg-slate-50">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">Ready to Grow?</span>
           <h2 className="text-4xl md:text-5xl font-bold text-[#002284] mt-4 mb-6 leading-tight">

@@ -13,6 +13,11 @@ const sourceSans = Source_Sans_3({
 export const metadata: Metadata = {
   title: "BRO Forum | Business Networking & Premium Growth",
   description: "Join the elite network of business leaders and professionals at BRO Forum.",
+  icons: {
+    icon: "/fav-icon.webp",
+    apple: "/fav-icon.webp",
+    shortcut: "/fav-icon.webp",
+  },
 };
 
 export default function RootLayout({
