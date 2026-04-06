@@ -111,7 +111,7 @@ export default function MembersPage() {
           ) : (
             <>
               <p className="text-slate-500 text-sm mb-8">{filtered.length} member{filtered.length !== 1 ? "s" : ""} found</p>
-              <div className="grid grid-cols-4 gap-5">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                 {filtered.map((member, i) => (
                   <motion.a
                     key={member.name}

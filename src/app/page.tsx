@@ -109,7 +109,7 @@ export default function Home() {
               Chennai's Premier Business Referral Forum
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-black text-[#002284] leading-[1.1]">
+            <h1 className="text-4xl md:text-6xl font-black text-[#002284] leading-[1.1]">
               Your Network<br />
               Is Your<br />
               <span className="text-[#01acac]">Net Worth.</span>

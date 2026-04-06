@@ -115,7 +115,7 @@ export default function JoinPage() {
         </div>
         <div className="absolute top-0 right-0 w-1/2 h-full bg-[#01acac]/10 blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div className="max-w-7xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start relative z-10">
           {/* Left */}
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="space-y-8">
             <div className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold">
@@ -140,7 +140,7 @@ export default function JoinPage() {
               ))}
             </ul>
 
-            <div className="grid grid-cols-2 gap-4 pt-4">
+            <div className="grid grid-cols-2 gap-3 pt-4">
               {steps.map((s, i) => (
                 <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-4">
                   <div className="text-[#01acac] font-black text-lg mb-1">{s.num}</div>

@@ -70,7 +70,7 @@ export default function WhoWeArePage() {
             <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
               <Image src="/features-image.png" alt="BRO Forum Meeting" fill className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#002284]/60 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8 grid grid-cols-3 gap-4">
+              <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 grid grid-cols-3 gap-2 md:gap-4">
                 {[{ v: "2,500+", l: "Members" }, { v: "45+", l: "Chapters" }, { v: "$150M+", l: "Referrals" }].map(s => (
                   <div key={s.l} className="bg-white/20 backdrop-blur-md rounded-2xl p-4 text-center border border-white/20">
                     <div className="text-2xl font-bold text-white">{s.v}</div>
@@ -119,8 +119,8 @@ export default function WhoWeArePage() {
             <h2 className="text-4xl md:text-5xl font-bold text-[#002284] mt-4">How We Got Here</h2>
           </div>
           <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#002284] via-[#01acac] to-[#002284]" />
-            <div className="space-y-12">
+            <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#002284] via-[#01acac] to-[#002284]" />
+            <div className="space-y-8 md:space-y-12">
               {milestones.map((m, i) => (
                 <motion.div
                   key={m.year}
@@ -128,9 +128,9 @@ export default function WhoWeArePage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex items-start gap-8 pl-24 relative"
+                  className="flex items-start gap-6 pl-14 md:pl-24 relative"
                 >
-                  <div className="absolute left-0 w-16 h-16 bg-[#002284] rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  <div className="absolute left-0 w-10 h-10 md:w-16 md:h-16 bg-[#002284] rounded-xl md:rounded-2xl flex items-center justify-center text-white font-bold text-xs md:text-sm shadow-lg">
                     {m.year}
                   </div>
                   <div className="bg-slate-50 rounded-2xl p-6 flex-1 border border-slate-100">

@@ -91,8 +91,8 @@ export default function Header() {
           "fixed left-0 right-0 z-50 hidden md:flex items-stretch transition-all duration-300 overflow-visible",
           barVisible ? "top-[36px]" : "top-0",
           scrolled
-            ? "bg-white/80 backdrop-blur-2xl border-b border-white/50"
-            : "bg-white/60 backdrop-blur-2xl border-b border-white/30"
+            ? "bg-white/90 backdrop-blur-3xl border-b border-white/60 shadow-sm"
+            : "bg-white/75 backdrop-blur-3xl border-b border-white/40"
         )}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-[#010755]/5 via-transparent to-[#03adad]/8 pointer-events-none" />
@@ -154,7 +154,7 @@ export default function Header() {
 
       {/* Mobile Header */}
       <header className={cn("fixed left-0 right-0 z-50 md:hidden transition-all duration-300", barVisible ? "top-[36px]" : "top-0")}>
-        <div className="flex items-center justify-between px-4 py-3 bg-white/70 backdrop-blur-2xl border-b border-white/40 shadow-[0_4px_24px_rgba(1,7,85,0.10)]">
+        <div className="flex items-center justify-between px-4 py-3 bg-white/90 backdrop-blur-3xl border-b border-white/50 shadow-sm">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex items-center gap-2 bg-white/80 px-3 py-1.5 rounded-xl">
               <div className="relative h-6 w-[72px]">
