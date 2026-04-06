@@ -25,7 +25,7 @@ export default function RootLayout({
       lang="en"
       className={`${sourceSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col pt-[76px]">
+      <body className="min-h-full flex flex-col">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

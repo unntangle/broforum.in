@@ -57,7 +57,7 @@ export default function WhoWeArePage() {
             <p className="text-lg text-slate-600 leading-relaxed">
               Unlike casual networking, BRO Forum is structured, accountable, and results-driven. Our members don't just exchange cards — they exchange revenue.
             </p>
-            <Link href="/membership" className="inline-flex items-center gap-2 bg-[#002284] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#002284]/90 transition-all">
+            <Link href="/members" className="inline-flex items-center gap-2 bg-[#002284] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#002284]/90 transition-all">
               Explore Membership <ArrowRight size={18} />
             </Link>
           </motion.div>
@@ -192,7 +192,7 @@ export default function WhoWeArePage() {
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">Ready to Join the Network?</h2>
           <p className="text-white/70 text-xl mb-10">Become part of a community that actively works to grow your business every single week.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/membership" className="bg-[#01acac] text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-[#01acac]/90 transition-all inline-flex items-center gap-2">
+            <Link href="/members" className="bg-[#01acac] text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-[#01acac]/90 transition-all inline-flex items-center gap-2">
               Apply for Membership <ArrowRight size={20} />
             </Link>
             <Link href="/contact" className="bg-white/10 text-white border border-white/20 px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all">

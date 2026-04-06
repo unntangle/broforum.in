@@ -61,7 +61,7 @@ export default function Footer() {
               {[
                 { label: "Home", href: "/" },
                 { label: "Who We Are", href: "/who-we-are" },
-                { label: "Members", href: "/membership" },
+                { label: "Members", href: "/members" },
                 { label: "Events", href: "/events" },
                 { label: "Contact", href: "/contact" },
               ].map(item => (

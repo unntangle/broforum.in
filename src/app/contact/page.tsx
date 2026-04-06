@@ -73,7 +73,7 @@ export default function ContactPage() {
             <div className="bg-slate-50 rounded-2xl p-6 space-y-3">
               <h3 className="font-bold text-[#002284]">Quick Actions</h3>
               {[
-                { label: "Apply for Membership", href: "/membership" },
+                { label: "Apply for Membership", href: "/members" },
                 { label: "Browse Upcoming Events", href: "/events" },
                 { label: "Find a Chapter Near You", href: "/who-we-are" },
               ].map(l => (

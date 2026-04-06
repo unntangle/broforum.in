@@ -3,444 +3,390 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, Trophy, Globe, Zap, Target, TrendingUp, BarChart3 } from "lucide-react";
+import { ArrowRight, Users, Globe, TrendingUp, CheckCircle, Calendar, MapPin, Clock, Handshake, Star, Shield, Target } from "lucide-react";
 
 const stats = [
-  { label: "Active Members", value: "2,500+", icon: Users },
-  { label: "Global Chapters", value: "45+", icon: Globe },
-  { label: "Business Generated", value: "$150M+", icon: Zap },
-  { label: "Success Stories", value: "1,200+", icon: Trophy },
+  { label: "Active Members", value: "15+", icon: Users },
+  { label: "Chapters", value: "1", icon: Globe },
+  { label: "Business Referrals", value: "Weekly", icon: TrendingUp },
+  { label: "Years Running", value: "7+", icon: Star },
 ];
 
+const howItWorks = [
+  { step: "01", title: "Apply to Join", desc: "Submit your membership application. One seat per business category — no competition, only collaboration." },
+  { step: "02", title: "Attend a Meeting", desc: "Visit as a guest on any Thursday, 8:30–9:30 AM IST. Experience the structured referral format firsthand." },
+  { step: "03", title: "Get Accepted", desc: "Our chapter reviews your application. Once accepted, you hold the exclusive seat for your category." },
+  { step: "04", title: "Give & Receive Referrals", desc: "Every week, members pass qualified referrals. The more you give, the more you receive." },
+];
+
+const values = [
+  { icon: Handshake, title: "Givers Gain", desc: "Our founding philosophy — members who actively give referrals consistently receive more in return." },
+  { icon: Shield, title: "One Seat Per Category", desc: "Only one member per business type per chapter. Zero internal competition, maximum trust." },
+  { icon: Target, title: "Structured & Accountable", desc: "Every meeting follows a proven agenda. No small talk — every minute drives real business outcomes." },
+  { icon: TrendingUp, title: "Results Driven", desc: "Members track referrals passed and received. Your ROI is measurable from day one." },
+];
+
+const members = [
+  { name: "Mr. P. Manohar", business: "Aqua Eco Green Technology", category: "Pumps", initials: "PM" },
+  { name: "Mr. G. Subramani", business: "SJ Window", category: "UPVC Windows", initials: "GS" },
+  { name: "Mr. G M Muthu", business: "GM Modular", category: "Interior Contractor", initials: "GM" },
+  { name: "Dr. S. Virapan", business: "SanVir Associates", category: "MEP Consultant", initials: "SV" },
+  { name: "Mr. M. Ravi", business: "VTECH O-MATE Solar", category: "Solar Power", initials: "MR" },
+  { name: "Mr. A. Perumal", business: "V for U Financial", category: "Loans", initials: "AP" },
+];
+
+function getNextThursday(): string {
+  const now = new Date();
+  const ist = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  const day = ist.getDay();
+  const daysUntil = (4 - day + 7) % 7 || 7;
+  const next = new Date(ist);
+  next.setDate(ist.getDate() + daysUntil);
+  return next.toLocaleDateString("en-IN", {
+    weekday: "long", day: "numeric", month: "long", year: "numeric",
+    timeZone: "Asia/Kolkata",
+  });
+}
+
 export default function Home() {
+  const nextThursday = getNextThursday();
+
   return (
     <div className="flex flex-col w-full">
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center bg-slate-50 overflow-hidden">
-        <div className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 py-20 lg:py-0">
+
+      {/* ── Hero ── */}
+      <section className="relative min-h-[88vh] flex items-center bg-slate-50 overflow-hidden">
+        {/* Background orbs */}
+        <div className="absolute top-0 right-0 w-[55%] h-full bg-[#002284]/3 rounded-l-[4rem] pointer-events-none" />
+        <div className="absolute bottom-10 left-0 w-64 h-64 bg-[#01acac]/8 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col space-y-8 lg:col-span-1"
+            className="space-y-8"
           >
-            <div className="inline-flex items-center space-x-2 bg-brand-light/10 text-brand-light px-4 py-2 rounded-full w-fit">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-light opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-light"></span>
-              </span>
-              <span className="text-sm font-semibold uppercase tracking-wider">Premium Business Network</span>
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-[#002284]/8 text-[#002284] px-4 py-2 rounded-full text-sm font-bold">
+              <span className="w-2 h-2 rounded-full bg-[#01acac] animate-pulse" />
+              Chennai's Premier Business Referral Forum
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-brand-dark leading-[1.1]">
-              Strategy That <span className="text-brand-light underline decoration-brand-accent/50 underline-offset-8">Scales</span>,<br />
-              Growth That Lasts.
+            <h1 className="text-5xl md:text-6xl font-black text-[#002284] leading-[1.1]">
+              Your Network<br />
+              Is Your<br />
+              <span className="text-[#01acac]">Net Worth.</span>
             </h1>
 
-            <p className="text-xl text-slate-600 max-w-xl leading-relaxed">
-              Scaling is not about growing faster; it's about growing smarter.
-              Connect with high-caliber business leaders and transform your vision into an unstoppable legacy.
+            <p className="text-lg text-slate-600 max-w-lg leading-relaxed">
+              BRO Forum — Business Relationship Organisation — is a structured, referral-based networking community. Members meet every Thursday to pass qualified referrals and grow each other's businesses.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Link
-                href="/join"
-                className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accent/90 text-brand-dark px-10 py-4 rounded-full font-bold text-lg transition-all hover:scale-105 flex items-center justify-center space-x-2 shadow-lg shadow-brand-accent/20"
-              >
-                <span>Apply for Membership</span>
-                <ArrowRight size={20} />
+            <div className="flex flex-wrap gap-4">
+              <Link href="/join" className="inline-flex items-center gap-2 bg-[#002284] hover:bg-[#002284]/90 text-white px-8 py-4 rounded-xl font-bold text-base transition-all">
+                Apply for Membership <ArrowRight size={18} />
               </Link>
-              <Link
-                href="/about"
-                className="text-brand-dark font-semibold hover:text-brand-light transition-colors group flex items-center space-x-2"
-              >
-                <span>How it Works</span>
-                <div className="w-8 h-[2px] bg-brand-accent group-hover:w-12 transition-all"></div>
+              <Link href="/events" className="inline-flex items-center gap-2 border-2 border-[#002284] text-[#002284] hover:bg-[#002284]/8 px-8 py-4 rounded-xl font-bold text-base transition-all">
+                Attend a Meeting
               </Link>
+            </div>
+
+            {/* Next meeting pill */}
+            <div className="inline-flex items-center gap-3 bg-white border border-slate-200 rounded-2xl px-5 py-3 shadow-sm">
+              <div className="w-8 h-8 bg-[#01acac] rounded-lg flex items-center justify-center shrink-0">
+                <Calendar size={15} className="text-white" />
+              </div>
+              <div>
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Next Meeting</p>
+                <p className="text-sm font-bold text-[#002284]">{nextThursday} · 8:30 AM IST</p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Spacer column — image is absolutely positioned */}
-          <div className="hidden lg:block" />
+          {/* Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
+            className="hidden lg:block relative"
+          >
+            <div className="relative h-[560px] rounded-3xl overflow-hidden shadow-2xl">
+              <Image src="/hero-image.png" alt="BRO Forum Members" fill className="object-cover object-center" priority />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#002284]/40 to-transparent" />
+            </div>
+            {/* Floating stat card */}
+            <div className="absolute -bottom-6 -left-8 bg-white rounded-2xl shadow-xl px-6 py-4 border border-slate-100">
+              <p className="text-xs text-slate-400 uppercase tracking-widest font-bold">Meetings Held</p>
+              <p className="text-3xl font-black text-[#002284]">350+</p>
+              <p className="text-xs text-slate-500 mt-0.5">Every Thursday since 2018</p>
+            </div>
+          </motion.div>
         </div>
-
-        {/* Hero Image — absolutely pinned flush to right & top of section */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="hidden lg:block absolute top-8 bottom-8 right-0 w-[50%] overflow-hidden rounded-l-[2rem] shadow-2xl z-0"
-        >
-          <Image
-            src="/hero-image.png"
-            alt="Premium Business Leader"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover object-center"
-            priority
-          />
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-brand-dark/20 to-transparent"></div>
-        </motion.div>
-
-        {/* Background Decorative Elements */}
-        <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[60%] bg-brand-light/5 rounded-full blur-3xl -z-0"></div>
-        <div className="absolute bottom-[5%] left-[5%] w-[30%] h-[40%] bg-brand-accent/5 rounded-full blur-3xl -z-0"></div>
       </section>
 
-      {/* Stats Section */}
-      <section className="bg-brand-dark py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      {/* ── Stats Bar ── */}
+      <section className="bg-[#002284] py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="flex flex-col space-y-2 border-l border-white/10 pl-6"
+                className="text-center border-r border-white/10 last:border-0 px-4"
               >
-                <div className="bg-brand-accent/10 p-3 rounded-xl w-fit">
-                  <stat.icon className="text-brand-accent" size={24} />
-                </div>
-                <span className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-                  {stat.value}
-                </span>
-                <span className="text-slate-400 font-medium">
-                  {stat.label}
-                </span>
+                <div className="text-4xl font-black text-white mb-1">{stat.value}</div>
+                <div className="text-[#01acac] text-sm font-semibold">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features/Services Section */}
-      <section className="py-24 bg-white overflow-hidden">
+      {/* ── What is BRO Forum ── */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="order-2 lg:order-1 relative"
+            className="relative"
           >
-            <div className="relative h-[500px] lg:h-[600px] rounded-[2rem] overflow-hidden shadow-2xl z-10">
-              <Image
-                src="/features-image.png"
-                alt="Business collaboration"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
+            <div className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl">
+              <Image src="/features-image.png" alt="BRO Forum Meeting" fill className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#002284]/60 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20">
+                <p className="text-white font-bold">Every Thursday · 8:30–9:30 AM</p>
+                <p className="text-white/70 text-sm mt-0.5">Structured referral passing · Chennai Chapter</p>
+              </div>
             </div>
-            {/* Decorative back element */}
-            <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-brand-accent/20 rounded-[2rem] -z-0"></div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="order-1 lg:order-2 space-y-8"
-          >
-            <div className="space-y-4">
-              <span className="text-brand-light font-bold uppercase tracking-widest text-sm">Innovating Business Success</span>
-              <h2 className="text-3xl md:text-5xl font-bold text-brand-dark leading-tight">
-                We walk data-driven Marketing in simple and basic Innovative IT industry course
-              </h2>
-              <p className="text-lg text-slate-600">
-                Our approach combines traditional networking values with cutting-edge data analytics to ensure every connection is a growth opportunity.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {[
-                { title: "Strategy", desc: "Expertly crafted business roadmaps that align with your long-term goals.", icon: Target },
-                { title: "Branding", desc: "Building premium brand identities that resonate with your target market.", icon: TrendingUp },
-                { title: "Analytics", desc: "Real-time performance tracking to optimize every stage of your scaling journey.", icon: BarChart3 },
-              ].map((item, i) => (
-                <div key={item.title} className="flex items-start space-x-4 p-6 rounded-2xl border border-slate-100 hover:border-brand-light/20 hover:bg-slate-50/50 transition-all group">
-                  <div className="bg-brand-light/10 p-3 rounded-xl text-brand-light group-hover:bg-brand-light group-hover:text-white transition-colors">
-                    <item.icon size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-brand-dark">{item.title}</h3>
-                    <p className="text-slate-600 text-sm">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Empower People Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row gap-12 items-center mb-20 text-center lg:text-left">
-            <div className="flex-1 space-y-6">
-              <span className="text-brand-light font-bold uppercase tracking-widest text-sm">Empower People with growth</span>
-              <h2 className="text-4xl md:text-5xl font-bold text-brand-dark leading-tight">
-                Strategies That Scale<br /> Your Business
-              </h2>
-              <p className="text-lg text-slate-600 max-w-2xl px-6 lg:px-0">
-                We believe that the heart of every successful business is its people. Our network provides the mentors, tools, and connections needed to empower your team and scale your operations sustainably.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center space-x-2 bg-brand-dark text-white px-8 py-4 rounded-full font-bold hover:bg-brand-dark/90 transition-all shadow-lg"
-              >
-                <span>Read More</span>
-                <ArrowRight size={18} />
-              </Link>
-            </div>
-            
-            <div className="flex-1 w-full">
-               <div className="relative h-[400px] w-full rounded-[2rem] overflow-hidden shadow-xl">
-                  <Image
-                    src="/hero-image.png"
-                    alt="Network focus"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-[2px]"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Link href="/join" className="w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0 animate-bounce">
-                      <ArrowRight size={32} className="text-brand-dark" />
-                    </Link>
-                  </div>
-               </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Marketing Strategy", desc: "Tailored campaigns designed to reach your ideal audience.", icon: Zap },
-              { title: "Brand Identity", desc: "Creating a lasting impression through visual excellence.", icon: Users },
-              { title: "Business Analysis", desc: "Deep dives into your data to find hidden opportunities.", icon: Trophy },
-              { title: "Digital Solutions", desc: "Leveraging tech to automate and streamline your growth.", icon: Globe },
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1"
-              >
-                <div className="w-12 h-12 bg-brand-accent/20 rounded-2xl flex items-center justify-center mb-6 text-brand-dark font-bold">
-                  {i + 1}
-                </div>
-                <h3 className="text-xl font-bold text-brand-dark mb-3">{card.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{card.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tertiary Section - Your Vision */}
-      <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/tertiary-image.png"
-            alt="Premium Office"
-            fill
-            sizes="100vw"
-            className="object-cover brightness-[0.3]"
-          />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-              Your Vision, Our Expertise,<br />
-              <span className="text-brand-accent italic">Unstoppable Growth</span>
-            </h2>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              We provide the framework, you provide the ambition. Together, we build businesses that don't just survive the market—they lead it.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto">
-              {[
-                { label: "Elite Mentorship", value: "Direct access to industry titans." },
-                { label: "Strategic Alliances", value: "Partnerships that drive revenue." },
-                { label: "Global Reach", value: "Connecting you to 45+ chapters." },
-              ].map((item, i) => (
-                <div key={i} className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 text-center">
-                  <h3 className="text-brand-accent font-bold text-xl mb-2">{item.label}</h3>
-                  <p className="text-slate-400 text-sm">{item.value}</p>
-                </div>
-              ))}
+            <div>
+              <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">About BRO Forum</span>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#002284] mt-3 leading-tight">
+                We Build Businesses<br />Through Relationships
+              </h2>
+              <p className="text-slate-600 mt-4 leading-relaxed text-lg">
+                BRO Forum is not casual networking. It's a structured, weekly commitment where members actively refer business to each other — tracked, accountable, and results-driven.
+              </p>
             </div>
+
+            <ul className="space-y-4">
+              {[
+                "One exclusive seat per business category — no internal competition",
+                "Structured 60-minute meetings every Thursday",
+                "Formal referral passing with accountability",
+                "Members-only business directory and 1-to-1 meetings",
+                "Built on the philosophy: Givers Gain",
+              ].map(item => (
+                <li key={item} className="flex items-start gap-3 text-slate-700">
+                  <CheckCircle size={18} className="text-[#01acac] shrink-0 mt-0.5" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <Link href="/who-we-are" className="inline-flex items-center gap-2 text-[#002284] font-bold hover:text-[#01acac] transition-colors">
+              Learn more about us <ArrowRight size={16} />
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Value Proposition Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center lg:text-left">
-          <div className="max-w-4xl mb-16">
-             <span className="text-brand-light font-bold uppercase tracking-widest text-sm">Our Solution Approach</span>
-             <h2 className="text-3xl md:text-5xl font-bold text-brand-dark mt-4 leading-tight">
-                At BRO Forum, our solution approach is tech centered with a focus on 100% client satisfaction
-             </h2>
+      {/* ── How It Works ── */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">The Process</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-[#002284] mt-3">How BRO Forum Works</h2>
+            <p className="text-slate-500 mt-4 max-w-xl mx-auto">From guest to member to referral powerhouse — here's the journey.</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Innovative Networking",
-                desc: "A New Method for Success in the digital age.",
-                img: "/features-image.png",
-                date: "March 20, 2026"
-              },
-              {
-                title: "Scale Your Team",
-                desc: "Hiring the Right Talent for sustainable growth.",
-                img: "/hero-image.png",
-                date: "April 05, 2026"
-              },
-              {
-                title: "Global Expansion",
-                desc: "Entering New Markets Safely and effectively.",
-                img: "/features-image.png",
-                date: "May 12, 2026"
-              }
-            ].map((post, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {howItWorks.map((step, i) => (
               <motion.div
-                key={i}
+                key={step.step}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="group cursor-pointer"
+                className="bg-white rounded-3xl p-7 border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all"
               >
-                <div className="relative h-64 rounded-3xl overflow-hidden mb-6 shadow-md transition-shadow group-hover:shadow-xl">
-                  <Image
-                    src={post.img}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform group-hover:scale-110 duration-500"
-                  />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full text-xs font-bold text-brand-dark">
-                    Article
-                  </div>
-                </div>
-                <span className="text-brand-light font-semibold text-sm">{post.date}</span>
-                <h3 className="text-2xl font-bold text-brand-dark mt-2 group-hover:text-brand-light transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-slate-600 mt-2">{post.desc}</p>
+                <div className="text-[#01acac] font-black text-4xl mb-4">{step.step}</div>
+                <h3 className="text-lg font-bold text-[#002284] mb-2">{step.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{step.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Quote Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-white rounded-[3rem] p-12 lg:p-20 shadow-xl relative overflow-hidden flex flex-col lg:flex-row items-center gap-12">
-             <div className="lg:w-2/3 space-y-8">
-                <div className="w-16 h-16 bg-brand-accent/20 rounded-full flex items-center justify-center">
-                   <Users className="text-brand-dark" size={32} />
-                </div>
-                <h2 className="text-3xl md:text-5xl font-bold text-brand-dark leading-tight italic">
-                  "Thanks to BRO Forum, our revenue has doubled in just 12 months. The network is unparalleled."
-                </h2>
-                <div className="flex items-center space-x-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                       <Image
-                         src="/avatar-1.png"
-                         alt="Testimonial User"
-                         fill
-                         sizes="64px"
-                         className="object-cover"
-                       />
-                    </div>
-                   <div>
-                      <h4 className="font-bold text-brand-dark text-xl">Jonathan Reed</h4>
-                      <p className="text-slate-500">CEO, Tech Ventures</p>
-                   </div>
-                </div>
-             </div>
-             
-             <div className="lg:w-1/3 w-full">
-                <div className="bg-brand-dark rounded-3xl p-8 text-white space-y-6">
-                   <h3 className="text-2xl font-bold">Ready to scale?</h3>
-                   <p className="text-slate-300">Join 2,500+ leaders already growing their business with us.</p>
-                   <Link href="/join" className="block w-full bg-brand-accent text-brand-dark text-center py-4 rounded-full font-bold hover:scale-105 transition-transform">
-                      Get Started Today
-                   </Link>
-                </div>
-             </div>
+      {/* ── Next Meeting CTA ── */}
+      <section className="py-16 bg-[#002284] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)`, backgroundSize: "28px 28px" }} />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#01acac]/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+        <div className="relative max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="space-y-4 text-center lg:text-left">
+            <span className="text-[#01acac] font-bold uppercase tracking-widest text-xs">Join Us This Week</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Attend This Thursday's Meeting</h2>
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start text-white/70 text-sm">
+              <span className="flex items-center gap-1.5"><Calendar size={14} />{nextThursday}</span>
+              <span className="flex items-center gap-1.5"><Clock size={14} />8:30 – 9:30 AM IST</span>
+              <span className="flex items-center gap-1.5"><MapPin size={14} />Chennai Chapter</span>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-[#01acac] hover:bg-[#01acac]/90 text-white px-8 py-3.5 rounded-xl font-bold transition-all">
+              Register to Attend <ArrowRight size={16} />
+            </Link>
+            <Link href="/join" className="inline-flex items-center justify-center gap-2 border border-white/30 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-bold transition-all">
+              Apply for Membership
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Global Map Section */}
-      <section className="relative py-32 overflow-hidden bg-brand-dark">
-        <div className="absolute inset-0 opacity-20 z-0">
-          <Image
-            src="/map-bg.png"
-            alt="World Map"
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-20 text-white">
-             <h2 className="text-4xl md:text-6xl font-bold leading-tight">
-                Ready to Elevate Your Brand with<br />
-                <span className="text-brand-accent">Strategic Global Design?</span>
-             </h2>
-             <Link
-                href="/join"
-                className="inline-block mt-10 bg-brand-accent text-brand-dark px-12 py-5 rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-lg shadow-brand-accent/20"
-             >
-                Join the Network
-             </Link>
+      {/* ── Our Values ── */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">Why BRO Forum</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-[#002284] mt-3">Built on Proven Principles</h2>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { city: "New York", country: "USA", members: "120+ Members" },
-              { city: "London", country: "UK", members: "95+ Members" },
-              { city: "Singapore", country: "SG", members: "80+ Members" },
-              { city: "Dubai", country: "UAE", members: "110+ Members" },
-            ].map((chapter, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((v, i) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                key={v.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors group cursor-pointer"
+                className="group p-7 rounded-3xl border border-slate-100 hover:border-[#01acac]/30 hover:shadow-xl transition-all"
               >
-                <div className="flex justify-between items-start mb-4">
-                   <div className="w-10 h-10 bg-brand-accent/20 rounded-lg flex items-center justify-center">
-                      <Globe className="text-brand-accent" size={20} />
-                   </div>
-                   <ArrowRight className="text-white/20 group-hover:text-brand-accent transition-colors" size={20} />
+                <div className="w-12 h-12 bg-[#002284]/8 group-hover:bg-[#002284] rounded-2xl flex items-center justify-center mb-5 transition-colors">
+                  <v.icon size={22} className="text-[#002284] group-hover:text-white transition-colors" />
                 </div>
-                <h4 className="text-2xl font-bold text-white">{chapter.city}</h4>
-                <p className="text-brand-accent text-sm font-medium">{chapter.country}</p>
-                <p className="text-slate-400 text-sm mt-4">{chapter.members}</p>
+                <h3 className="text-lg font-bold text-[#002284] mb-2">{v.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{v.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Meet Some Members ── */}
+      <section className="py-20 bg-slate-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <span className="text-[#01acac] font-bold uppercase tracking-widest text-xs">Our Chapter</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#002284] mt-2">Meet Some of Our Members</h2>
+            </div>
+            <Link href="/members" className="inline-flex items-center gap-2 text-[#002284] font-bold hover:text-[#01acac] transition-colors shrink-0">
+              View all members <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+
+        {/* Carousel track */}
+        <div className="relative carousel-wrapper">
+          {/* Left fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+          {/* Right fade */}
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+
+          <div
+            className="flex gap-4 carousel-track"
+            onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
+            onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
+            style={{
+              animation: "scroll-members 25s linear infinite",
+              width: "max-content",
+            }}
+          >
+            {/* Render members twice for seamless loop */}
+            {[...members, ...members, ...members, ...members, ...members, ...members].map((m, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg transition-all shrink-0"
+                style={{ width: "210px" }}
+              >
+                {/* Portrait block */}
+                <div
+                  className="w-full flex items-center justify-center bg-[#e8edf5] relative"
+                  style={{ height: "240px" }}
+                >
+                  <span className="text-[#002284] font-black text-7xl tracking-tight select-none">{m.initials}</span>
+                  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#002284]/20 to-transparent" />
+                </div>
+                {/* Info */}
+                <div className="p-4">
+                  <p className="text-[#002284] font-bold text-sm leading-tight">{m.name}</p>
+                  <p className="text-[#01acac] text-xs font-semibold mt-1">{m.category}</p>
+                  <p className="text-slate-400 text-xs mt-0.5 leading-tight">{m.business}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <style jsx global>{`
+          @keyframes scroll-members {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(calc(-210px * 6 - 16px * 6)); }
+          }
+          .carousel-wrapper:hover .carousel-track {
+            animation-play-state: paused;
+          }
+        `}</style>
+      </section>
+
+      {/* ── Testimonial ── */}
+      <section className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="bg-gradient-to-br from-[#002284] to-[#003399] rounded-3xl p-10 md:p-16 relative overflow-hidden">
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)`, backgroundSize: "24px 24px" }} />
+            <div className="relative text-center space-y-6">
+              <div className="text-[#01acac] text-6xl font-black leading-none">"</div>
+              <p className="text-white text-2xl md:text-3xl font-bold leading-relaxed max-w-3xl mx-auto">
+                BRO Forum changed the way I do business. Within 3 months I had more referrals than I'd received in the previous 2 years combined.
+              </p>
+              <div className="pt-4">
+                <div className="w-12 h-12 rounded-full bg-[#01acac] flex items-center justify-center mx-auto mb-3 text-white font-black">MR</div>
+                <p className="text-white font-bold">Mr. M. Ravi</p>
+                <p className="text-white/60 text-sm">VTECH O-MATE Solar · BRO Forum Member</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ── */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">Ready to Grow?</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-[#002284] mt-4 mb-6 leading-tight">
+            One Seat. One Category.<br />Unlimited Referrals.
+          </h2>
+          <p className="text-slate-600 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+            Seats fill fast. Once your category is taken, it's closed. Apply now to secure your exclusive seat in the BRO Forum Chennai Chapter.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link href="/join" className="inline-flex items-center gap-2 bg-[#002284] hover:bg-[#002284]/90 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all">
+              Apply for Membership <ArrowRight size={16} />
+            </Link>
+            <Link href="/contact" className="inline-flex items-center gap-2 border-2 border-[#002284] text-[#002284] hover:bg-[#002284]/8 px-6 py-2.5 rounded-xl font-bold text-sm transition-all">
+              Contact Us
+            </Link>
           </div>
         </div>
       </section>
