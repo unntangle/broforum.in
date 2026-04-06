@@ -75,6 +75,7 @@ export default function Home() {
             src="/hero-image.png"
             alt="Premium Business Leader"
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-center"
             priority
           />
@@ -130,6 +131,7 @@ export default function Home() {
                 src="/features-image.png"
                 alt="Business collaboration"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
@@ -199,9 +201,10 @@ export default function Home() {
             <div className="flex-1 w-full">
                <div className="relative h-[400px] w-full rounded-[2rem] overflow-hidden shadow-xl">
                   <Image
-                    src="/hero-image.png" 
+                    src="/hero-image.png"
                     alt="Network focus"
                     fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-[2px]"></div>
@@ -247,6 +250,7 @@ export default function Home() {
             src="/tertiary-image.png"
             alt="Premium Office"
             fill
+            sizes="100vw"
             className="object-cover brightness-[0.3]"
           />
         </div>
@@ -326,6 +330,7 @@ export default function Home() {
                     src={post.img}
                     alt={post.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform group-hover:scale-110 duration-500"
                   />
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full text-xs font-bold text-brand-dark">
@@ -355,9 +360,15 @@ export default function Home() {
                   "Thanks to BRO Forum, our revenue has doubled in just 12 months. The network is unparalleled."
                 </h2>
                 <div className="flex items-center space-x-4">
-                   <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                      <Image src="/avatar-1.png" alt="Testimonial User" fill className="object-cover" />
-                   </div>
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                       <Image
+                         src="/avatar-1.png"
+                         alt="Testimonial User"
+                         fill
+                         sizes="64px"
+                         className="object-cover"
+                       />
+                    </div>
                    <div>
                       <h4 className="font-bold text-brand-dark text-xl">Jonathan Reed</h4>
                       <p className="text-slate-500">CEO, Tech Ventures</p>
@@ -385,6 +396,7 @@ export default function Home() {
             src="/map-bg.png"
             alt="World Map"
             fill
+            sizes="100vw"
             className="object-cover"
           />
         </div>

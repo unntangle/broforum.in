@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Users, Globe, Target, Shield, Handshake, TrendingUp, Star, Award } from "lucide-react";
+import ParallaxHero from "@/components/ParallaxHero";
 
 const values = [
   { icon: Handshake, title: "Givers Gain", desc: "Our core philosophy — those who give referrals receive them. Generosity is the engine of our network." },
@@ -13,10 +14,9 @@ const values = [
 ];
 
 const leadership = [
-  { name: "Rajesh Nair", role: "Founder & President", chapter: "Chennai HQ", img: "/hero-image.png" },
-  { name: "Priya Sharma", role: "Director of Growth", chapter: "Bangalore", img: "/features-image.png" },
-  { name: "Arjun Mehta", role: "Regional Director", chapter: "Mumbai", img: "/hero-image.png" },
-  { name: "Sunita Reddy", role: "Head of Chapters", chapter: "Hyderabad", img: "/features-image.png" },
+  { name: "Mr. P. Manohar", role: "Chairman", business: "Aqua Eco Green Technology Pvt. Ltd.", initials: "PM", color: "#002284" },
+  { name: "Mr. G. Subramani", role: "Vice Chairman", business: "SJ Window", initials: "GS", color: "#01acac" },
+  { name: "Mr. G M Muthu", role: "Secretary-cum-Treasurer", business: "GM Modular", initials: "GM", color: "#1a3a6b" },
 ];
 
 const milestones = [
@@ -31,33 +31,12 @@ export default function WhoWeArePage() {
   return (
     <div className="flex flex-col w-full">
 
-      {/* Hero */}
-      <section className="relative bg-[#002284] py-16 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <Image src="/map-bg.png" alt="" fill className="object-cover" />
-        </div>
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-[#01acac]/10 blur-3xl" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
-          >
-            <div className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#01acac]" />
-              About BRO Forum
-            </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
-              We Build <span className="text-[#01acac]">Businesses</span><br /> Through Relationships
-            </h1>
-            <p className="text-xl text-white/70 leading-relaxed max-w-2xl">
-              BRO Forum — Business Relationship Organisation — is a structured, referral-based business networking community built on the belief that the right relationships are the most powerful business tool you'll ever have.
-            </p>
-          </motion.div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/60 to-transparent" />
-      </section>
+      <ParallaxHero
+        breadcrumbs={[{ label: "Who We Are" }]}
+        title={<>We Build <span className="text-[#01acac]">Businesses</span><br />Through Relationships</>}
+        subtitle="BRO Forum — Business Relationship Organisation — is a structured, referral-based business networking community built on the belief that the right relationships are the most powerful business tool you'll ever have."
+        align="left"
+      />
 
       {/* Mission */}
       <section className="py-24 bg-white">
@@ -170,26 +149,36 @@ export default function WhoWeArePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">The Team</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#002284] mt-4">Leadership</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#002284] mt-4">Leadership Team</h2>
             <p className="text-slate-600 mt-4 max-w-xl mx-auto">Experienced leaders committed to growing your business and expanding the BRO Forum community globally.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {leadership.map((l, i) => (
               <motion.div
                 key={l.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.15 }}
                 viewport={{ once: true }}
-                className="group text-center"
+                className="group text-center w-64"
               >
-                <div className="relative h-64 rounded-3xl overflow-hidden mb-4 shadow-md">
-                  <Image src={l.img} alt={l.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#002284]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* Avatar */}
+                <div
+                  className="relative w-40 h-40 rounded-full mx-auto mb-5 flex items-center justify-center shadow-xl group-hover:scale-105 transition-transform duration-300"
+                  style={{ backgroundColor: l.color }}
+                >
+                  <span className="text-white font-black text-4xl tracking-tight select-none">{l.initials}</span>
+                  {/* Ring */}
+                  <div
+                    className="absolute inset-0 rounded-full border-4 border-white/20 group-hover:border-[#01acac]/60 transition-colors duration-300"
+                  />
+                </div>
+                {/* Badge */}
+                <div className="inline-block bg-[#01acac]/10 text-[#01acac] text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">
+                  {l.role}
                 </div>
                 <h3 className="text-lg font-bold text-[#002284]">{l.name}</h3>
-                <p className="text-[#01acac] text-sm font-semibold">{l.role}</p>
-                <p className="text-slate-500 text-xs mt-1">{l.chapter}</p>
+                <p className="text-slate-500 text-sm mt-1">{l.business}</p>
               </motion.div>
             ))}
           </div>

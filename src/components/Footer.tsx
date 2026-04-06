@@ -10,7 +10,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-5">
             <div className="relative h-14 w-40">
-              <Image src="/BRO-logo.webp" alt="BRO Forum Logo" fill className="object-contain object-left" />
+              <Image
+                src="/BRO-logo.webp"
+                alt="BRO Forum Logo"
+                fill
+                sizes="160px"
+                className="object-contain object-left"
+              />
             </div>
             <p className="text-slate-500 text-sm leading-relaxed">
               Empowering business leaders through premium networking and strategic growth. Join the elite network today.

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, ArrowRight, Globe, MessageSquare } from "lucide-react";
+import ParallaxHero from "@/components/ParallaxHero";
+import { Mail, Phone, MapPin, Clock, ArrowRight, Globe } from "lucide-react";
 import { useState } from "react";
 
 const offices = [
@@ -33,26 +34,12 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col w-full">
 
-      {/* Hero */}
-      <section className="relative bg-[#002284] py-12 overflow-hidden">
-        <div className="absolute inset-0 opacity-10"><Image src="/map-bg.png" alt="" fill className="object-cover" /></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#01acac]/15 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <MessageSquare size={14} className="text-[#01acac]" />
-              Get in Touch
-            </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
-              Let's Start a<br /><span className="text-[#01acac]">Conversation</span>
-            </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
-              Whether you're ready to join, exploring a chapter in your city, or want to partner with us — our team typically responds within 4 business hours.
-            </p>
-          </motion.div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/60 to-transparent" />
-      </section>
+      <ParallaxHero
+        breadcrumbs={[{ label: "Contact" }]}
+        title={<>Let's Start a<br /><span className="text-[#01acac]">Conversation</span></>}
+        subtitle="Whether you're ready to join, exploring a chapter in your city, or want to partner with us — our team typically responds within 4 business hours."
+        align="left"
+      />
 
       {/* Contact Form + Info */}
       <section className="py-24 bg-white">
@@ -65,7 +52,6 @@ export default function ContactPage() {
               <h2 className="text-3xl font-bold text-[#002284] mt-2">We're Here to Help</h2>
               <p className="text-slate-600 mt-3 leading-relaxed">Reach out for membership queries, chapter information, event registrations, or partnership opportunities.</p>
             </div>
-
             <div className="space-y-5">
               {[
                 { icon: Mail, label: "Email", value: "hello@broforum.in" },
@@ -84,8 +70,6 @@ export default function ContactPage() {
                 </div>
               ))}
             </div>
-
-            {/* Quick Links */}
             <div className="bg-slate-50 rounded-2xl p-6 space-y-3">
               <h3 className="font-bold text-[#002284]">Quick Actions</h3>
               {[
@@ -104,11 +88,8 @@ export default function ContactPage() {
           {/* Right: Form */}
           <div className="lg:col-span-3">
             {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="h-full flex flex-col items-center justify-center text-center bg-[#002284]/5 rounded-3xl p-16 border border-[#002284]/10"
-              >
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+                className="h-full flex flex-col items-center justify-center text-center bg-[#002284]/5 rounded-3xl p-16 border border-[#002284]/10">
                 <div className="w-20 h-20 bg-[#01acac] rounded-full flex items-center justify-center mb-6">
                   <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -119,66 +100,29 @@ export default function ContactPage() {
                 <button onClick={() => setSubmitted(false)} className="mt-8 text-[#01acac] font-semibold hover:underline">Send another message</button>
               </motion.div>
             ) : (
-              <motion.form
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                onSubmit={handleSubmit}
-                className="bg-slate-50 rounded-3xl p-8 space-y-5 border border-slate-100"
-              >
+              <motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} onSubmit={handleSubmit}
+                className="bg-slate-50 rounded-3xl p-8 space-y-5 border border-slate-100">
                 <h3 className="text-2xl font-bold text-[#002284]">Send us a Message</h3>
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide block mb-2">Full Name *</label>
-                    <input
-                      required
-                      type="text"
-                      value={form.name}
-                      onChange={e => setForm({ ...form, name: e.target.value })}
-                      placeholder="John Smith"
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide block mb-2">Email Address *</label>
-                    <input
-                      required
-                      type="email"
-                      value={form.email}
-                      onChange={e => setForm({ ...form, email: e.target.value })}
-                      placeholder="john@company.com"
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide block mb-2">Phone Number</label>
-                    <input
-                      type="tel"
-                      value={form.phone}
-                      onChange={e => setForm({ ...form, phone: e.target.value })}
-                      placeholder="+91 98765 43210"
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] focus:ring-2 focus:ring-[#01acac]/20 transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide block mb-2">Business / Company</label>
-                    <input
-                      type="text"
-                      value={form.business}
-                      onChange={e => setForm({ ...form, business: e.target.value })}
-                      placeholder="Your Business Name"
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] focus:ring-2 focus:ring-[#01acac]/20 transition-all"
-                    />
-                  </div>
+                  {[
+                    { label: "Full Name *", key: "name", type: "text", placeholder: "John Smith", required: true },
+                    { label: "Email Address *", key: "email", type: "email", placeholder: "john@company.com", required: true },
+                    { label: "Phone Number", key: "phone", type: "tel", placeholder: "+91 98765 43210", required: false },
+                    { label: "Business / Company", key: "business", type: "text", placeholder: "Your Business Name", required: false },
+                  ].map(f => (
+                    <div key={f.key}>
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wide block mb-2">{f.label}</label>
+                      <input required={f.required} type={f.type} placeholder={f.placeholder}
+                        value={form[f.key as keyof typeof form]}
+                        onChange={e => setForm({ ...form, [f.key]: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] transition-all" />
+                    </div>
+                  ))}
                 </div>
-
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wide block mb-2">I'm Interested In</label>
-                  <select
-                    value={form.interest}
-                    onChange={e => setForm({ ...form, interest: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] focus:ring-2 focus:ring-[#01acac]/20 transition-all"
-                  >
+                  <select value={form.interest} onChange={e => setForm({ ...form, interest: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] transition-all">
                     <option>General Enquiry</option>
                     <option>Membership Application</option>
                     <option>Chapter Information</option>
@@ -187,27 +131,16 @@ export default function ContactPage() {
                     <option>Press / Media</option>
                   </select>
                 </div>
-
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wide block mb-2">Message *</label>
-                  <textarea
-                    required
-                    rows={4}
-                    value={form.message}
-                    onChange={e => setForm({ ...form, message: e.target.value })}
+                  <textarea required rows={4} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
                     placeholder="Tell us about yourself and what you're looking for..."
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] focus:ring-2 focus:ring-[#01acac]/20 transition-all resize-none"
-                  />
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] transition-all resize-none" />
                 </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#002284] hover:bg-[#002284]/90 text-white py-4 rounded-xl font-bold text-base transition-all flex items-center justify-center gap-2 group"
-                >
+                <button type="submit" className="w-full bg-[#002284] hover:bg-[#002284]/90 text-white py-4 rounded-xl font-bold text-base transition-all flex items-center justify-center gap-2 group">
                   Send Message
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
-
                 <p className="text-xs text-slate-400 text-center">We respect your privacy. Your information is never shared or sold.</p>
               </motion.form>
             )}
@@ -224,14 +157,9 @@ export default function ContactPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {offices.map((o, i) => (
-              <motion.div
-                key={o.city}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all"
-              >
+              <motion.div key={o.city} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }} viewport={{ once: true }}
+                className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all">
                 <div className="w-12 h-12 bg-[#002284] rounded-2xl flex items-center justify-center mb-4">
                   <MapPin size={20} className="text-white" />
                 </div>
@@ -258,14 +186,9 @@ export default function ContactPage() {
           </div>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-                viewport={{ once: true }}
-                className="bg-slate-50 rounded-2xl p-6 border border-slate-100"
-              >
+              <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 }} viewport={{ once: true }}
+                className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                 <h3 className="font-bold text-[#002284] mb-2 flex items-start gap-3">
                   <span className="w-6 h-6 bg-[#01acac] rounded-lg flex items-center justify-center text-white text-xs font-black shrink-0 mt-0.5">{i + 1}</span>
                   {faq.q}

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useState } from "react";
+import ParallaxHero from "@/components/ParallaxHero";
 
 const members = [
   { name: "Dr. S. Virapan", business: "SanVir Associates Pvt. Ltd.", category: "MEP Consultant", website: "#" },
@@ -54,28 +55,11 @@ export default function MembersPage() {
   return (
     <div className="flex flex-col w-full">
 
-      {/* Hero */}
-      <section className="relative bg-[#002284] pt-12 pb-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <Image src="/map-bg.png" alt="" fill className="object-cover" />
-        </div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#01acac]/20 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#01acac] animate-pulse" />
-              {members.length} Active Members
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-3">
-              Our <span className="text-[#01acac]">Members</span>
-            </h1>
-            <p className="text-base text-white/70 max-w-xl mx-auto">
-              Meet the business leaders behind BRO Forum. Click any member to visit their business.
-            </p>
-          </motion.div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent" />
-      </section>
+      <ParallaxHero
+        breadcrumbs={[{ label: "Members" }]}
+        title={<>Our <span className="text-[#01acac]">Members</span></>}
+        subtitle="Meet the business leaders behind BRO Forum. Click any member to visit their business."
+      />
 
       {/* Search & Filter */}
       <section className="bg-white py-10 border-b border-slate-100">

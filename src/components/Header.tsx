@@ -11,6 +11,7 @@ const navLinks = [
   { name: "Who we are", href: "/who-we-are" },
   { name: "Members", href: "/membership" },
   { name: "Events", href: "/events" },
+  { name: "Gallery", href: "/gallery" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -53,6 +54,7 @@ export default function Header() {
                 src="/BRO-logo.webp"
                 alt="BRO Forum"
                 fill
+                sizes="(max-width: 768px) 100vw, 160px"
                 className="object-contain"
                 priority
               />
@@ -122,6 +124,7 @@ export default function Header() {
                   src="/BRO-logo.webp"
                   alt="BRO Forum"
                   fill
+                  sizes="72px"
                   className="object-contain"
                   priority
                 />

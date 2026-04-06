@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ParallaxHero from "@/components/ParallaxHero";
 import { ArrowRight, Calendar, MapPin, Clock, Users, Filter } from "lucide-react";
 import { useState } from "react";
 
@@ -105,26 +106,11 @@ export default function EventsPage() {
   return (
     <div className="flex flex-col w-full">
 
-      {/* Hero */}
-      <section className="relative bg-[#002284] pt-12 pb-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10"><Image src="/map-bg.png" alt="" fill className="object-cover" /></div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#01acac]/15 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <Calendar size={14} className="text-[#01acac]" />
-              Upcoming Events 2025
-            </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
-              Where Business<br /><span className="text-[#01acac]">Relationships Begin</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-              From weekly chapter meetings to national summits — every BRO Forum event is designed to generate real business value, not just handshakes.
-            </p>
-          </motion.div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/60 to-transparent" />
-      </section>
+      <ParallaxHero
+        breadcrumbs={[{ label: "Events" }]}
+        title={<>Where Business<br /><span className="text-[#01acac]">Relationships Begin</span></>}
+        subtitle="From weekly chapter meetings to national summits — every BRO Forum event is designed to generate real business value, not just handshakes."
+      />
 
       {/* Events List */}
       <section className="py-24 bg-white">
