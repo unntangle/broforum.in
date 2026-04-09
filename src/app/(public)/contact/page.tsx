@@ -5,7 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import ParallaxHero from "@/components/ParallaxHero";
 import { Mail, Phone, MapPin, Clock, ArrowRight, Globe } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { submitEnquiry } from "@/app/admin/actions/enquiries";
 
 const offices = [
   { city: "Chennai", country: "India (HQ)", address: "Level 8, Tidel Park, Taramani, Chennai – 600 113", phone: "+91 44 6654 0000", email: "chennai@broforum.in", hours: "Mon–Fri, 9:00 AM – 6:00 PM" },
@@ -24,11 +25,21 @@ const faqs = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
   const [form, setForm] = useState({ name: "", email: "", phone: "", business: "", interest: "General Enquiry", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    startTransition(async () => {
+      try {
+        await submitEnquiry(form);
+        setSubmitted(true);
+      } catch (err: any) {
+        setError(err.message ?? "Failed to send. Please try again.");
+      }
+    });
   };
 
   return (
@@ -137,9 +148,12 @@ export default function ContactPage() {
                     placeholder="Tell us about yourself and what you're looking for..."
                     className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-800 text-sm outline-none focus:border-[#01acac] transition-all resize-none" />
                 </div>
-                <button type="submit" className="w-full bg-[#002284] hover:bg-[#002284]/90 text-white py-4 rounded-xl font-bold text-base transition-all flex items-center justify-center gap-2 group">
-                  Send Message
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                {error && (
+                  <p className="text-red-500 text-sm text-center">{error}</p>
+                )}
+                <button type="submit" disabled={isPending} className="w-full bg-[#002284] hover:bg-[#002284]/90 disabled:opacity-60 text-white py-4 rounded-xl font-bold text-base transition-all flex items-center justify-center gap-2 group">
+                  {isPending ? "Sending…" : "Send Message"}
+                  {!isPending && <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
                 </button>
                 <p className="text-xs text-slate-400 text-center">We respect your privacy. Your information is never shared or sold.</p>
               </motion.form>

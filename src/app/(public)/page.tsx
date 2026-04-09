@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Users, Globe, TrendingUp, CheckCircle, Calendar, MapPin, Clock, Handshake, Star, Shield, Target } from "lucide-react";
 
 const stats = [
-  { label: "Active Members", value: "15+", icon: Users },
+  { label: "Active Members", value: "22+", icon: Users },
   { label: "Chapters", value: "1", icon: Globe },
   { label: "Business Referrals", value: "Weekly", icon: TrendingUp },
   { label: "Years Running", value: "7+", icon: Star },
@@ -27,12 +27,28 @@ const values = [
 ];
 
 const members = [
-  { name: "Mr. P. Manohar", business: "Aqua Eco Green Technology", category: "Pumps", initials: "PM" },
-  { name: "Mr. G. Subramani", business: "SJ Window", category: "UPVC Windows", initials: "GS" },
+  { name: "Mr. S. Virapan", business: "SanVir Associates Pvt. Ltd.", category: "MEP Consultant", initials: "SV" },
+  { name: "Mr. V. Ramesh Kumar", business: "Srushti - SRRE Communications", category: "Brand & Communication Agency", initials: "VR" },
+  { name: "Mr. S. Dinesh", business: "RSD Foundations", category: "Civil Constructions & Builders", initials: "SD" },
+  { name: "Mr. P. Manohar", business: "Aqua Eco Green Technology Pvt. Ltd.", category: "Pumps", initials: "PM" },
+  { name: "Mr. Sudharrson Raj", business: "Veeravel Suppliers", category: "Sand Supplier", initials: "SR" },
   { name: "Mr. G M Muthu", business: "GM Modular", category: "Interior Contractor", initials: "GM" },
-  { name: "Dr. S. Virapan", business: "SanVir Associates", category: "MEP Consultant", initials: "SV" },
-  { name: "Mr. M. Ravi", business: "VTECH O-MATE Solar", category: "Solar Power", initials: "MR" },
-  { name: "Mr. A. Perumal", business: "V for U Financial", category: "Loans", initials: "AP" },
+  { name: "Mr. A. Perumal", business: "V for U Financial Services", category: "Loans", initials: "AP" },
+  { name: "Mr. M. Ravi", business: "TECH-O-MATE Solar Consultancy", category: "Solar Power", initials: "MR" },
+  { name: "Mr. R. Deenadhayalan", business: "Classical Pest Control", category: "Pest Control", initials: "RD" },
+  { name: "Mr. Sathish Ganasekar", business: "Oli Av Tech", category: "Home Automation", initials: "SG" },
+  { name: "Mr. G. Subramani", business: "SJ Windows", category: "UPVC Window", initials: "GS" },
+  { name: "Mr. N. Sakthivel", business: "Property Consultant", category: "Property Consultant", initials: "NS" },
+  { name: "Mr. R. Rajesh", business: "SS Cool Power Systems", category: "Home Appliances Dealer", initials: "RR" },
+  { name: "Mr. Vinoth Suren Raj", business: "Fotophactory", category: "Photography & Videography", initials: "VS" },
+  { name: "Mr. V. M. Mathiarasu", business: "Techmaxx Engineering", category: "Fire Fighting", initials: "VM" },
+  { name: "Mr. R. Ashokan", business: "LED Star Light", category: "LED Lighting", initials: "RA" },
+  { name: "Mr. R. Neelakandan", business: "VRN Power Control System", category: "Electrical Panel", initials: "RN" },
+  { name: "Ms. D. Vijayalakshmi", business: "Vida Brokerage Masters", category: "Insurance", initials: "DV" },
+  { name: "Mr. Gokul Sridharan", business: "unntangle", category: "IT & Home Automation", initials: "GS" },
+  { name: "Mr. Suresh Purushothaman", business: "Rakshan Decors", category: "Commercial Furniture", initials: "SP" },
+  { name: "Mr. Sathish Kumar I", business: "ASK Unique Solutions", category: "STP", initials: "SK" },
+  { name: "Mr. B. Ravindran", business: "DI Constructions", category: "Civil Contractor", initials: "BR" },
 ];
 
 const testimonials = [
@@ -345,12 +361,12 @@ export default function Home() {
             onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
             onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
             style={{
-              animation: "scroll-members 25s linear infinite",
+              animation: "scroll-members 60s linear infinite",
               width: "max-content",
             }}
           >
             {/* Render members twice for seamless loop */}
-            {[...members, ...members, ...members, ...members, ...members, ...members].map((m, i) => (
+            {[...members, ...members].map((m, i) => (
               <div
                 key={i}
                 className="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg transition-all shrink-0"
@@ -378,7 +394,7 @@ export default function Home() {
         <style jsx global>{`
           @keyframes scroll-members {
             0%   { transform: translateX(0); }
-            100% { transform: translateX(calc(-210px * 6 - 16px * 6)); }
+            100% { transform: translateX(calc(-210px * 22 - 16px * 22)); }
           }
           .carousel-wrapper:hover .carousel-track {
             animation-play-state: paused;

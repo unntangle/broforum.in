@@ -1,28 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useState } from "react";
 import ParallaxHero from "@/components/ParallaxHero";
-
-const members = [
-  { name: "Dr. S. Virapan", business: "SanVir Associates Pvt. Ltd.", category: "MEP Consultant", website: "#" },
-  { name: "Mr. V. Ramesh Kumar", business: "Srushti - SRRE Communications", category: "Brand & Communication Agency", website: "#" },
-  { name: "Ar. S. Dinesh", business: "RSD Foundations", category: "Real Estate Promoter", website: "#" },
-  { name: "Mr. P. Manohar", business: "Aqua Eco Green Technology Pvt. Ltd.", category: "Pumps", website: "#" },
-  { name: "Mr. Sudharson Raj", business: "Sri Kaligambal Industries", category: "Fasteners Manufacturing", website: "#" },
-  { name: "Mr. G M Muthu", business: "GM Modular", category: "Interior Contractor", website: "#" },
-  { name: "Mr. A. Perumal", business: "V for U Financial Services", category: "Loans", website: "#" },
-  { name: "Mr. M. Ravi", business: "VTECH - O-MATE SOLAR", category: "Solar Power", website: "#" },
-  { name: "Mr. R. Deenadhayalan", business: "Classical Pest Control", category: "Pest Control", website: "#" },
-  { name: "Mr. G. Sathish", business: "Oli Av Tech", category: "Home Automation", website: "#" },
-  { name: "Mr. G. Subramani", business: "SJ Window", category: "UPVC Window", website: "#" },
-  { name: "Mr. Sakthivel N", business: "Growth Way Developers", category: "Real Estate", website: "#" },
-  { name: "Mr. R. Rajesh", business: "Sss Cool Power Systems", category: "Home Appliances Dealer", website: "#" },
-  { name: "Mr. Vinoth Suren Raj", business: "Fotophactory", category: "Photography & Videography", website: "#" },
-  { name: "Mr. Mathiarasu V M", business: "Techmaxx Engineering", category: "Fire Fighting", website: "#" },
-];
+import type { MemberRow } from "@/lib/supabase";
 
 function getInitials(name: string) {
   return name
@@ -31,30 +13,37 @@ function getInitials(name: string) {
     .split(" ")
     .filter(Boolean)
     .slice(0, 2)
-    .map(w => w[0].toUpperCase())
+    .map((w) => w[0].toUpperCase())
     .join("");
 }
 
-const categories = ["All", ...Array.from(new Set(members.map(m => m.category))).sort()];
-
-export default function MembersPage() {
+export default function MembersClient({ members }: { members: MemberRow[] }) {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filtered = members.filter(m => {
+  const categories = [
+    "All",
+    ...Array.from(new Set(members.map((m) => m.category))).sort(),
+  ];
+
+  const filtered = members.filter((m) => {
     const matchesSearch =
       m.name.toLowerCase().includes(search.toLowerCase()) ||
       m.business.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = activeCategory === "All" || m.category === activeCategory;
+    const matchesCategory =
+      activeCategory === "All" || m.category === activeCategory;
     return matchesSearch && matchesCategory;
   });
 
   return (
     <div className="flex flex-col w-full">
-
       <ParallaxHero
         breadcrumbs={[{ label: "Members" }]}
-        title={<>Our <span className="text-[#01acac]">Members</span></>}
+        title={
+          <>
+            Our <span className="text-[#01acac]">Members</span>
+          </>
+        }
         subtitle="Meet the business leaders behind BRO Forum. Click any member to visit their business."
       />
 
@@ -69,11 +58,14 @@ export default function MembersPage() {
                 type="text"
                 placeholder="Search member or business..."
                 value={search}
-                onChange={e => setSearch(e.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
                 className="flex-1 bg-transparent text-slate-800 text-base outline-none placeholder-slate-400"
               />
               {search && (
-                <button onClick={() => setSearch("")} className="text-slate-400 hover:text-slate-700 ml-3 text-xs font-semibold">
+                <button
+                  onClick={() => setSearch("")}
+                  className="text-slate-400 hover:text-slate-700 ml-3 text-xs font-semibold"
+                >
                   Clear
                 </button>
               )}
@@ -90,9 +82,6 @@ export default function MembersPage() {
                     : "bg-slate-50 text-slate-600 hover:bg-[#01acac]/10 hover:text-[#01acac] border border-slate-200 hover:border-[#01acac]/30"
                 }`}
               >
-                {activeCategory === cat && (
-                  <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#002284] to-[#01acac] -z-10" />
-                )}
                 {cat}
               </button>
             ))}
@@ -110,13 +99,15 @@ export default function MembersPage() {
             </div>
           ) : (
             <>
-              <p className="text-slate-500 text-sm mb-8">{filtered.length} member{filtered.length !== 1 ? "s" : ""} found</p>
+              <p className="text-slate-500 text-sm mb-8">
+                {filtered.length} member{filtered.length !== 1 ? "s" : ""} found
+              </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                 {filtered.map((member, i) => (
                   <motion.a
-                    key={member.name}
-                    href={member.website}
-                    target="_blank"
+                    key={member.id}
+                    href={member.website ?? "#"}
+                    target={member.website && member.website !== "#" ? "_blank" : undefined}
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -128,12 +119,6 @@ export default function MembersPage() {
                       className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden mb-4 flex items-center justify-center group-hover:shadow-xl transition-all"
                       style={{ backgroundColor: "#e8edf5" }}
                     >
-                      <div className="absolute inset-0 opacity-10"
-                        style={{
-                          backgroundImage: `radial-gradient(circle at 20% 80%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)`,
-                          backgroundSize: "30px 30px"
-                        }}
-                      />
                       <span className="text-[#002284] font-black text-5xl tracking-tight select-none relative z-10">
                         {getInitials(member.name)}
                       </span>
@@ -155,13 +140,17 @@ export default function MembersPage() {
       <section className="py-20 bg-[#002284]">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Want to be Listed Here?</h2>
-          <p className="text-white/70 mb-8">Join BRO Forum and get your business in front of 2,500+ professionals.</p>
-          <a href="/contact" className="inline-flex items-center gap-2 bg-[#01acac] text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-[#01acac]/90 transition-all">
+          <p className="text-white/70 mb-8">
+            Join BRO Forum and grow your business through structured referrals.
+          </p>
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-[#01acac] text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-[#01acac]/90 transition-all"
+          >
             Apply for Membership
           </a>
         </div>
       </section>
-
     </div>
   );
 }
