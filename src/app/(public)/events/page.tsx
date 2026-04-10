@@ -301,7 +301,7 @@ export default function EventsPage() {
                 { label: "Frequency", value: "Every Thursday" },
                 { label: "Time", value: "8:30 AM – 9:30 AM IST" },
                 { label: "Duration", value: "1 hour (structured)" },
-                { label: "Location", value: "Chennai, Tamil Nadu" },
+                { label: "Location", value: "No.14A, West Club Road, Shenoy Nagar, Chennai" },
                 { label: "Format", value: "In-person" },
                 { label: "Language", value: "English / Tamil" },
                 { label: "Member Cost", value: "Membership fee applies" },

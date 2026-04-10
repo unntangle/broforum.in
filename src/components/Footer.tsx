@@ -80,15 +80,22 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-slate-500">
               <li>
                 <p className="font-semibold text-[#002284]">Email</p>
-                <p>hello@broforum.in</p>
+                <a href="mailto:brochennai.connect@gmail.com" className="hover:text-[#01acac] transition-colors">brochennai.connect@gmail.com</a>
               </li>
               <li>
                 <p className="font-semibold text-[#002284]">Phone</p>
-                <p>+91 44 6654 0000</p>
+                <a href="tel:+919444036627" className="hover:text-[#01acac] transition-colors">+91 94440 36627</a>
               </li>
               <li>
-                <p className="font-semibold text-[#002284]">HQ</p>
-                <p>Level 8, Tidel Park, Taramani, Chennai – 600 113</p>
+                <p className="font-semibold text-[#002284]">Address</p>
+                <a
+                  href="https://maps.google.com/?q=No.14A,+West+Club+Road,+Shenoy+Nagar,+Chennai,+Tamil+Nadu+600030"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#01acac] transition-colors leading-relaxed"
+                >
+                  No.14A, West Club Road,<br />Shenoy Nagar, Chennai,<br />Tamil Nadu – 600 030
+                </a>
               </li>
             </ul>
           </div>

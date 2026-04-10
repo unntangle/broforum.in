@@ -76,29 +76,29 @@ create policy "Public insert enquiries" on enquiries for insert with check (true
 -- Seed Data — Members (22 members from BRO list)
 -- =====================================================
 
-insert into members (name, business, category, email, phone, status) values
-  ('Mr. S. Virapan',        'SanVir Associates Pvt. Ltd.',         'MEP Consultant',              'virapans@gmail.com',            '9444036627', 'active'),
-  ('Mr. V. Ramesh Kumar',   'Srushti - SRRE Communications',       'Brand & Communication Agency', 'ramesh@srushticonnect.com',     '9444398464', 'active'),
-  ('Mr. S. Dinesh',         'RSD Foundations',                     'Civil Constructions & Builders','dinesh@RSDfoundations.com',    '9840472333', 'active'),
-  ('Mr. P. Manohar',        'Aqua Eco Green Technology Pvt. Ltd.', 'Pumps',                       'mano@aquaecogreen.com',         '9840066745', 'active'),
-  ('Mr. Sudharrson Raj',    'Veeravel Suppliers',                  'Sand Supplier',               'msudharsonraj@gmai.com',        '8637431982', 'active'),
-  ('Mr. G M Muthu',         'GM Modular',                          'Interior Contractor',         'gmmmodular@gmail.com',          '9840190449', 'active'),
-  ('Mr. A. Perumal',        'V for U Financial Services',          'Loans',                       'info@vforuloans.com',           '9884323232', 'active'),
-  ('Mr. M. Ravi',           'TECH-O-MATE Solar Consultancy',       'Solar Power',                 'techomatesolar@gmail.com',      '9094934000', 'active'),
-  ('Mr. R. Deenadhayalan',  'Classical Pest Control',              'Pest Control',                'classicalpestcontrol@gmail.com','9150116447', 'active'),
-  ('Mr. Sathish Ganasekar', 'Oli Av Tech',                         'Home Automation',             'sathish@oli-avtech.in',         '9884180066', 'active'),
-  ('Mr. G. Subramani',      'SJ Windows',                          'UPVC Window',                 'info@sjupvcwindows.com',        '9384869885', 'active'),
-  ('Mr. N. Sakthivel',      'Property Consultant',                 'Property Consultant',         'sakthirioo222@gmail.com',       '9342234028', 'active'),
-  ('Mr. R. Rajesh',         'SS Cool Power Systems',               'Home Appliances Dealer',      'sscoolpowersystems@gmail.com',  '9600111070', 'active'),
-  ('Mr. Vinoth Suren Raj',  'Fotophactory',                        'Photography & Videography',   'Vinothsurenraj@gmail.com',      '9626220188', 'active'),
-  ('Mr. V. M. Mathiarasu',  'Techmaxx Engineering',                'Fire Fighting',               'techmaxengineering@gmail.com',  '9940222426', 'active'),
-  ('Mr. R. Ashokan',        'LED Star Light',                      'LED Lighting',                null,                            '9159828178', 'active'),
-  ('Mr. R. Neelakandan',    'VRN Power Control System',            'Electrical Panel',            'neelakandan1985@rediffmail.com','9790905051', 'active'),
-  ('Ms. D. Vijayalakshmi',  'Vida Brokerage Masters',              'Insurance',                   'dhana2411sekar@gmail.com',      '9382535646', 'active'),
-  ('Mr. Gokul Sridharan',   'unntangle',                           'IT & Home Automation',        'gokul@unntangle.com',           '7092747933', 'active'),
-  ('Mr. Suresh Purushothaman','Rakshan Decors',                    'Commercial Furniture',        'sales@onestopservices.info',    '9500055772', 'active'),
-  ('Mr. Sathish Kumar I',   'ASK Unique Solutions',                'STP',                         'askupl@gmail.com',              '9841145422', 'active'),
-  ('Mr. B. Ravindran',      'DI Constructions',                    'Civil Contractor',            'djconstructions570@gmail.com',  '6382776422', 'active')
+insert into members (name, business, category, email, phone, status, website) values
+  ('Mr. S. Virapan',        'SanVir Associates Pvt. Ltd.',         'MEP Consultant',              'virapans@gmail.com',            '9444036627', 'active', 'https://sanvirassociates.com/'),
+  ('Mr. V. Ramesh Kumar',   'Srushti - SRRE Communications',       'Brand & Communication Agency', 'ramesh@srushticonnect.com',     '9444398464', 'active', null),
+  ('Mr. S. Dinesh',         'RSD Foundations',                     'Civil Constructions & Builders','dinesh@RSDfoundations.com',    '9840472333', 'active', 'https://www.rsdfoundations.com/'),
+  ('Mr. P. Manohar',        'Aqua Eco Green Technology Pvt. Ltd.', 'Pumps',                       'mano@aquaecogreen.com',         '9840066745', 'active', 'http://www.aquaecogreen.com/'),
+  ('Mr. Sudharrson Raj',    'Sri Kaligambal Industries',           'Sand Supplier',               'msudharsonraj@gmai.com',        '8637431982', 'active', 'https://skifasteners.com/'),
+  ('Mr. G M Muthu',         'GM Modular',                          'Interior Contractor',         'gmmmodular@gmail.com',          '9840190449', 'active', null),
+  ('Mr. A. Perumal',        'V for U Financial Services',          'Loans',                       'info@vforuloans.com',           '9884323232', 'active', 'https://vforuloans.com/'),
+  ('Mr. M. Ravi',           'TECH-O-MATE Solar Consultancy',       'Solar Power',                 'techomatesolar@gmail.com',      '9094934000', 'active', 'https://www.techomate.com/'),
+  ('Mr. R. Deenadhayalan',  'Classical Pest Control',              'Pest Control',                'classicalpestcontrol@gmail.com','9150116447', 'active', 'https://classicalpestcontrol.com/'),
+  ('Mr. Sathish Ganasekar', 'Oli Av Tech',                         'Home Automation',             'sathish@oli-avtech.in',         '9884180066', 'active', 'https://www.oli-avtech.in/'),
+  ('Mr. G. Subramani',      'SJ Windows',                          'UPVC Window',                 'info@sjupvcwindows.com',        '9384869885', 'active', 'https://www.sjupvcwindows.com/'),
+  ('Mr. N. Sakthivel',      'Property Consultant',                 'Property Consultant',         'sakthirioo222@gmail.com',       '9342234028', 'active', null),
+  ('Mr. R. Rajesh',         'SS Cool Power Systems',               'Home Appliances Dealer',      'sscoolpowersystems@gmail.com',  '9600111070', 'active', 'https://sspowercool.com/'),
+  ('Mr. Vinoth Suren Raj',  'Fotophactory',                        'Photography & Videography',   'Vinothsurenraj@gmail.com',      '9626220188', 'active', 'https://fotophactory.co.in/'),
+  ('Mr. V. M. Mathiarasu',  'Techmaxx Engineering',                'Fire Fighting',               'techmaxengineering@gmail.com',  '9940222426', 'active', 'https://techmaxxengg.com/'),
+  ('Mr. R. Ashokan',        'LED Star Light',                      'LED Lighting',                null,                            '9159828178', 'active', null),
+  ('Mr. R. Neelakandan',    'VRN Power Control System',            'Electrical Panel',            'neelakandan1985@rediffmail.com','9790905051', 'active', null),
+  ('Ms. D. Vijayalakshmi',  'Vida Brokerage Masters',              'Insurance',                   'dhana2411sekar@gmail.com',      '9382535646', 'active', null),
+  ('Mr. Gokul Sridharan',   'unntangle',                           'IT & Home Automation',        'gokul@unntangle.com',           '7092747933', 'active', 'https://unntangle.com/'),
+  ('Mr. Suresh Purushothaman','Rakshan Decors',                    'Commercial Furniture',        'sales@onestopservices.info',    '9500055772', 'active', 'https://rakshandecors.com/'),
+  ('Mr. Sathish Kumar I',   'ASK Unique Solutions',                'STP',                         'askupl@gmail.com',              '9841145422', 'active', null),
+  ('Mr. B. Ravindran',      'DI Constructions',                    'Civil Contractor',            'djconstructions570@gmail.com',  '6382776422', 'active', null)
 on conflict do nothing;
 
 -- =====================================================

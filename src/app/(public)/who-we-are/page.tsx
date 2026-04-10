@@ -14,9 +14,9 @@ const values = [
 ];
 
 const leadership = [
-  { name: "Mr. P. Manohar", role: "Chairman", business: "Aqua Eco Green Technology Pvt. Ltd.", initials: "PM", color: "#002284" },
-  { name: "Mr. G. Subramani", role: "Vice Chairman", business: "SJ Window", initials: "GS", color: "#01acac" },
-  { name: "Mr. G M Muthu", role: "Secretary-cum-Treasurer", business: "GM Modular", initials: "GM", color: "#1a3a6b" },
+  { name: "Mr. P. Manohar",   role: "Chairman",               business: "Aqua Eco Green Technology Pvt. Ltd.", initials: "PM", color: "#002284", photo: "/members-pics/P. MANOHAR.jpeg" },
+  { name: "Mr. G. Subramani", role: "Vice Chairman",           business: "SJ Window",                          initials: "GS", color: "#01acac", photo: "/members-pics/SUBRAMANI .G.jpeg" },
+  { name: "Mr. G M Muthu",    role: "Secretary-cum-Treasurer", business: "GM Modular",                         initials: "GM", color: "#1a3a6b", photo: "/members-pics/G M Muthu.webp" },
 ];
 
 const milestones = [
@@ -164,14 +164,22 @@ export default function WhoWeArePage() {
               >
                 {/* Avatar */}
                 <div
-                  className="relative w-40 h-40 rounded-full mx-auto mb-5 flex items-center justify-center shadow-xl group-hover:scale-105 transition-transform duration-300"
+                  className="relative w-40 h-40 rounded-full mx-auto mb-5 overflow-hidden shadow-xl group-hover:scale-105 transition-transform duration-300 border-4 border-white"
                   style={{ backgroundColor: l.color }}
                 >
-                  <span className="text-white font-black text-4xl tracking-tight select-none">{l.initials}</span>
-                  {/* Ring */}
-                  <div
-                    className="absolute inset-0 rounded-full border-4 border-white/20 group-hover:border-[#01acac]/60 transition-colors duration-300"
-                  />
+                  {l.photo ? (
+                    <Image
+                      src={l.photo}
+                      alt={l.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="160px"
+                    />
+                  ) : (
+                    <span className="text-white font-black text-4xl tracking-tight select-none flex items-center justify-center h-full">{l.initials}</span>
+                  )}
+                  {/* Hover ring */}
+                  <div className="absolute inset-0 rounded-full ring-4 ring-transparent group-hover:ring-[#01acac]/60 transition-all duration-300" />
                 </div>
                 {/* Badge */}
                 <div className="inline-block bg-[#01acac]/10 text-[#01acac] text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">

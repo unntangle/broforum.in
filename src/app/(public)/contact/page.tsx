@@ -8,13 +8,6 @@ import { Mail, Phone, MapPin, Clock, ArrowRight, Globe } from "lucide-react";
 import { useState, useTransition } from "react";
 import { submitEnquiry } from "@/app/admin/actions/enquiries";
 
-const offices = [
-  { city: "Chennai", country: "India (HQ)", address: "Level 8, Tidel Park, Taramani, Chennai – 600 113", phone: "+91 44 6654 0000", email: "chennai@broforum.in", hours: "Mon–Fri, 9:00 AM – 6:00 PM" },
-  { city: "Bangalore", country: "India", address: "3rd Floor, Prestige Technostar, Whitefield, Bangalore – 560 048", phone: "+91 80 4124 8800", email: "bangalore@broforum.in", hours: "Mon–Fri, 9:00 AM – 6:00 PM" },
-  { city: "Dubai", country: "UAE", address: "Office 412, Business Bay, Al Asayel St, Dubai", phone: "+971 4 800 0022", email: "dubai@broforum.in", hours: "Sun–Thu, 9:00 AM – 6:00 PM" },
-  { city: "Singapore", country: "Singapore", address: "80 Robinson Road, #11-01, Singapore 068898", phone: "+65 6226 1100", email: "singapore@broforum.in", hours: "Mon–Fri, 9:00 AM – 6:00 PM" },
-];
-
 const faqs = [
   { q: "Can I attend a chapter meeting before joining?", a: "Absolutely. Every prospective member gets a complimentary guest pass to attend one chapter meeting. This helps you experience the format before committing." },
   { q: "How are referrals tracked?", a: "BRO Forum uses a proprietary referral tracking platform where members log every referral passed and received. You can view your ROI dashboard at any time." },
@@ -65,10 +58,10 @@ export default function ContactPage() {
             </div>
             <div className="space-y-5">
               {[
-                { icon: Mail, label: "Email", value: "hello@broforum.in" },
-                { icon: Phone, label: "Phone", value: "+91 44 6654 0000" },
-                { icon: Globe, label: "Website", value: "www.broforum.in" },
-                { icon: Clock, label: "Response Time", value: "Within 4 business hours" },
+                { icon: Mail,  label: "Email",         value: "brochennai.connect@gmail.com", href: "mailto:brochennai.connect@gmail.com" },
+                { icon: Phone, label: "Phone",         value: "+91 94440 36627",              href: "tel:+919444036627" },
+                { icon: Globe, label: "Website",       value: "www.broforum.in",               href: "https://www.broforum.in" },
+                { icon: Clock, label: "Response Time", value: "Within 4 business hours",       href: null },
               ].map(item => (
                 <div key={item.label} className="flex items-start gap-4">
                   <div className="w-11 h-11 bg-[#002284]/10 rounded-xl flex items-center justify-center shrink-0">
@@ -76,7 +69,14 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-bold text-slate-400 uppercase tracking-wide">{item.label}</div>
-                    <div className="text-[#002284] font-semibold">{item.value}</div>
+                    {item.href ? (
+                      <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
+                        className="text-[#002284] font-semibold hover:text-[#01acac] transition-colors">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <div className="text-[#002284] font-semibold">{item.value}</div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -162,31 +162,75 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Offices */}
+      {/* Office */}
       <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">Our Offices</span>
-            <h2 className="text-4xl font-bold text-[#002284] mt-4">Find Us Globally</h2>
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">Our Office</span>
+            <h2 className="text-4xl font-bold text-[#002284] mt-4">Find Us</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {offices.map((o, i) => (
-              <motion.div key={o.city} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }} viewport={{ once: true }}
-                className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all">
-                <div className="w-12 h-12 bg-[#002284] rounded-2xl flex items-center justify-center mb-4">
-                  <MapPin size={20} className="text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-xl border border-slate-100">
+
+            {/* Info card */}
+            <div className="bg-white p-10 flex flex-col justify-center space-y-6">
+              <div className="w-12 h-12 bg-[#002284] rounded-2xl flex items-center justify-center">
+                <MapPin size={20} className="text-white" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-[#002284]">Chennai</h3>
+                <p className="text-[#01acac] text-sm font-bold mt-0.5">India (HQ)</p>
+              </div>
+              <div className="space-y-4 text-sm text-slate-600">
+                <div className="flex items-start gap-3">
+                  <MapPin size={16} className="text-[#01acac] shrink-0 mt-0.5" />
+                  <a
+                    href="https://maps.google.com/?q=No.14A,+West+Club+Road,+Shenoy+Nagar,+Chennai,+Tamil+Nadu+600030"
+                    target="_blank" rel="noopener noreferrer"
+                    className="hover:text-[#01acac] transition-colors leading-relaxed"
+                  >
+                    No.14A, West Club Road, Shenoy Nagar,<br />Chennai, Tamil Nadu – 600 030
+                  </a>
                 </div>
-                <h3 className="text-xl font-bold text-[#002284]">{o.city}</h3>
-                <p className="text-[#01acac] text-xs font-bold mb-3">{o.country}</p>
-                <div className="space-y-2 text-slate-600 text-xs leading-relaxed">
-                  <p>{o.address}</p>
-                  <p className="font-medium text-slate-800">{o.phone}</p>
-                  <p>{o.email}</p>
-                  <p className="text-slate-400">{o.hours}</p>
+                <div className="flex items-center gap-3">
+                  <Phone size={16} className="text-[#01acac] shrink-0" />
+                  <a href="tel:+919444036627" className="hover:text-[#01acac] transition-colors font-medium">
+                    +91 94440 36627
+                  </a>
                 </div>
-              </motion.div>
-            ))}
+                <div className="flex items-center gap-3">
+                  <Mail size={16} className="text-[#01acac] shrink-0" />
+                  <a href="mailto:brochennai.connect@gmail.com" className="hover:text-[#01acac] transition-colors">
+                    brochennai.connect@gmail.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Clock size={16} className="text-[#01acac] shrink-0" />
+                  <span>Mon–Fri, 9:00 AM – 6:00 PM</span>
+                </div>
+              </div>
+              <a
+                href="https://maps.google.com/?q=No.14A,+West+Club+Road,+Shenoy+Nagar,+Chennai,+Tamil+Nadu+600030"
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#002284] text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#002284]/90 transition-all w-fit"
+              >
+                <MapPin size={15} /> Get Directions
+              </a>
+            </div>
+
+            {/* Google Map */}
+            <div className="h-80 md:h-auto min-h-[360px]">
+              <iframe
+                title="BRO Forum Chennai Office"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.3!2d80.2318!3d13.0785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA0JzQyLjYiTiA4MMKwMTMnNTQuNSJF!5e0!3m2!1sen!2sin!4v1234567890!5m2!1sen!2sin&q=West+Club+Road,+Shenoy+Nagar,+Chennai+600030"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: "360px" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
           </div>
         </div>
       </section>

@@ -27,28 +27,28 @@ const values = [
 ];
 
 const members = [
-  { name: "Mr. S. Virapan", business: "SanVir Associates Pvt. Ltd.", category: "MEP Consultant", initials: "SV" },
-  { name: "Mr. V. Ramesh Kumar", business: "Srushti - SRRE Communications", category: "Brand & Communication Agency", initials: "VR" },
-  { name: "Mr. S. Dinesh", business: "RSD Foundations", category: "Civil Constructions & Builders", initials: "SD" },
-  { name: "Mr. P. Manohar", business: "Aqua Eco Green Technology Pvt. Ltd.", category: "Pumps", initials: "PM" },
-  { name: "Mr. Sudharrson Raj", business: "Veeravel Suppliers", category: "Sand Supplier", initials: "SR" },
-  { name: "Mr. G M Muthu", business: "GM Modular", category: "Interior Contractor", initials: "GM" },
-  { name: "Mr. A. Perumal", business: "V for U Financial Services", category: "Loans", initials: "AP" },
-  { name: "Mr. M. Ravi", business: "TECH-O-MATE Solar Consultancy", category: "Solar Power", initials: "MR" },
-  { name: "Mr. R. Deenadhayalan", business: "Classical Pest Control", category: "Pest Control", initials: "RD" },
-  { name: "Mr. Sathish Ganasekar", business: "Oli Av Tech", category: "Home Automation", initials: "SG" },
-  { name: "Mr. G. Subramani", business: "SJ Windows", category: "UPVC Window", initials: "GS" },
-  { name: "Mr. N. Sakthivel", business: "Property Consultant", category: "Property Consultant", initials: "NS" },
-  { name: "Mr. R. Rajesh", business: "SS Cool Power Systems", category: "Home Appliances Dealer", initials: "RR" },
-  { name: "Mr. Vinoth Suren Raj", business: "Fotophactory", category: "Photography & Videography", initials: "VS" },
-  { name: "Mr. V. M. Mathiarasu", business: "Techmaxx Engineering", category: "Fire Fighting", initials: "VM" },
-  { name: "Mr. R. Ashokan", business: "LED Star Light", category: "LED Lighting", initials: "RA" },
-  { name: "Mr. R. Neelakandan", business: "VRN Power Control System", category: "Electrical Panel", initials: "RN" },
-  { name: "Ms. D. Vijayalakshmi", business: "Vida Brokerage Masters", category: "Insurance", initials: "DV" },
-  { name: "Mr. Gokul Sridharan", business: "unntangle", category: "IT & Home Automation", initials: "GS" },
-  { name: "Mr. Suresh Purushothaman", business: "Rakshan Decors", category: "Commercial Furniture", initials: "SP" },
-  { name: "Mr. Sathish Kumar I", business: "ASK Unique Solutions", category: "STP", initials: "SK" },
-  { name: "Mr. B. Ravindran", business: "DI Constructions", category: "Civil Contractor", initials: "BR" },
+  { name: "Mr. S. Virapan", business: "SanVir Associates Pvt. Ltd.", category: "MEP Consultant", initials: "SV", photo: "/members-pics/S. VIRAPAN.jpeg", website: "https://sanvirassociates.com/" },
+  { name: "Mr. V. Ramesh Kumar", business: "Srushti - SRRE Communications", category: "Brand & Communication Agency", initials: "VR", photo: "/members-pics/V. RAMESH KUMAR .jpeg", website: null },
+  { name: "Mr. S. Dinesh", business: "RSD Foundations", category: "Civil Constructions & Builders", initials: "SD", photo: "/members-pics/S. DINESH.jpeg", website: "https://www.rsdfoundations.com/" },
+  { name: "Mr. P. Manohar", business: "Aqua Eco Green Technology Pvt. Ltd.", category: "Pumps", initials: "PM", photo: "/members-pics/P. MANOHAR.jpeg", website: "http://www.aquaecogreen.com/" },
+  { name: "Mr. Sudharrson Raj", business: "Sri Kaligambal Industries", category: "Sand Supplier", initials: "SR", photo: "/members-pics/SUDHARSON  RAJ.jpeg", website: "https://skifasteners.com/" },
+  { name: "Mr. G M Muthu", business: "GM Modular", category: "Interior Contractor", initials: "GM", photo: "/members-pics/G M Muthu.webp", website: null },
+  { name: "Mr. A. Perumal", business: "V for U Financial Services", category: "Loans", initials: "AP", photo: "/members-pics/A. PERUMAL.jpeg", website: "https://vforuloans.com/" },
+  { name: "Mr. M. Ravi", business: "TECH-O-MATE Solar Consultancy", category: "Solar Power", initials: "MR", photo: "/members-pics/M. RAVI.jpeg", website: "https://www.techomate.com/" },
+  { name: "Mr. R. Deenadhayalan", business: "Classical Pest Control", category: "Pest Control", initials: "RD", photo: null, website: "https://classicalpestcontrol.com/" },
+  { name: "Mr. Sathish Ganasekar", business: "Oli Av Tech", category: "Home Automation", initials: "SG", photo: "/members-pics/SATHISH GANASEKAR.jpeg", website: "https://www.oli-avtech.in/" },
+  { name: "Mr. G. Subramani", business: "SJ Windows", category: "UPVC Window", initials: "GS", photo: "/members-pics/SUBRAMANI .G.jpeg", website: "https://www.sjupvcwindows.com/" },
+  { name: "Mr. N. Sakthivel", business: "Property Consultant", category: "Property Consultant", initials: "NS", photo: "/members-pics/SAKTHIVEL.N.jpeg", website: null },
+  { name: "Mr. R. Rajesh", business: "SS Cool Power Systems", category: "Home Appliances Dealer", initials: "RR", photo: "/members-pics/R.RAJESH.jpeg", website: "https://sspowercool.com/" },
+  { name: "Mr. Vinoth Suren Raj", business: "Fotophactory", category: "Photography & Videography", initials: "VS", photo: "/members-pics/VINOTH SUREN RAJ.jpeg", website: "https://fotophactory.co.in/" },
+  { name: "Mr. V. M. Mathiarasu", business: "Techmaxx Engineering", category: "Fire Fighting", initials: "VM", photo: "/members-pics/MATHIARASU.V.M.webp", website: "https://techmaxxengg.com/" },
+  { name: "Mr. R. Ashokan", business: "LED Star Light", category: "LED Lighting", initials: "RA", photo: "/members-pics/R.Ashokan.jpeg", website: null },
+  { name: "Mr. R. Neelakandan", business: "VRN Power Control System", category: "Electrical Panel", initials: "RN", photo: null, website: null },
+  { name: "Ms. D. Vijayalakshmi", business: "Vida Brokerage Masters", category: "Insurance", initials: "DV", photo: "/members-pics/D.Vijayalakshmi.jpeg", website: null },
+  { name: "Mr. Gokul Sridharan", business: "unntangle", category: "IT & Home Automation", initials: "GS", photo: "/members-pics/Gokul Sridharan.jpeg", website: "https://unntangle.com/" },
+  { name: "Mr. Suresh Purushothaman", business: "Rakshan Decors", category: "Commercial Furniture", initials: "SP", photo: "/members-pics/SURESH PURUSHOTHAMAN.jpeg", website: "https://rakshandecors.com/" },
+  { name: "Mr. Sathish Kumar I", business: "ASK Unique Solutions", category: "STP", initials: "SK", photo: "/members-pics/SATHISH KUMAR.I.jpeg", website: null },
+  { name: "Mr. B. Ravindran", business: "DI Constructions", category: "Civil Contractor", initials: "BR", photo: "/members-pics/B.RAVINDRAN.jpeg", website: null },
 ];
 
 const testimonials = [
@@ -366,10 +366,13 @@ export default function Home() {
             }}
           >
             {/* Render members twice for seamless loop */}
-            {[...members, ...members].map((m, i) => (
-              <div
+                          {[...members, ...members].map((m, i) => (
+              <a
                 key={i}
-                className="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg transition-all shrink-0"
+                href={m.website ?? "#"}
+                target={m.website ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg transition-all shrink-0 cursor-pointer"
                 style={{ width: "210px" }}
               >
                 {/* Portrait block */}
@@ -377,7 +380,17 @@ export default function Home() {
                   className="w-full flex items-center justify-center bg-[#e8edf5] relative"
                   style={{ height: "240px" }}
                 >
-                  <span className="text-[#002284] font-black text-7xl tracking-tight select-none">{m.initials}</span>
+                  {m.photo ? (
+                    <Image
+                      src={m.photo}
+                      alt={m.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="210px"
+                    />
+                  ) : (
+                    <span className="text-[#002284] font-black text-7xl tracking-tight select-none">{m.initials}</span>
+                  )}
                   <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#002284]/20 to-transparent" />
                 </div>
                 {/* Info */}
@@ -386,7 +399,7 @@ export default function Home() {
                   <p className="text-[#01acac] text-xs font-semibold mt-1">{m.category}</p>
                   <p className="text-slate-400 text-xs mt-0.5 leading-tight">{m.business}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

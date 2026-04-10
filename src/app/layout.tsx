@@ -9,8 +9,11 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "BRO Forum | Business Networking & Premium Growth",
-  description: "Join the elite network of business leaders and professionals at BRO Forum.",
+  title: {
+    default: "BRO Forum | Business Relationship Organisation",
+    template: "%s | BRO Forum",
+  },
+  description: "BRO Forum — Chennai's premier structured business referral network. Meet every Thursday to grow your business through qualified referrals.",
   icons: {
     icon: "/fav-icon.webp",
     apple: "/fav-icon.webp",

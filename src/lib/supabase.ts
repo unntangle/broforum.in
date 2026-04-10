@@ -24,6 +24,7 @@ export type MemberRow = {
   phone: string | null;
   status: "active" | "inactive";
   website: string | null;
+  photo: string | null;
   created_at: string;
 };
 
