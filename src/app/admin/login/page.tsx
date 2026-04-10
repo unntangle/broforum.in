@@ -16,19 +16,24 @@ export default function AdminLoginPage() {
     setError("");
     setLoading(true);
 
-    const res = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: username, password }),
-    });
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: username.trim(), password }),
+      });
 
-    const data = await res.json();
-    setLoading(false);
+      const data = await res.json();
 
-    if (!res.ok) {
-      setError(data.error ?? "Invalid credentials. Please try again.");
-    } else {
-      window.location.href = "/admin";
+      if (!res.ok) {
+        setError(data.error ?? "Invalid credentials. Please try again.");
+      } else {
+        window.location.href = "/admin";
+      }
+    } catch {
+      setError("Connection error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -37,30 +42,18 @@ export default function AdminLoginPage() {
 
       {/* ── Left Panel ── */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#002284] flex-col items-center justify-center relative overflow-hidden">
-        {/* Dot pattern */}
         <div
           className="absolute inset-0 opacity-10"
           style={{ backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)`, backgroundSize: "32px 32px" }}
         />
-        {/* Glow */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-[#01acac]/20 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#01acac]/10 rounded-full blur-3xl" />
 
-        {/* Content */}
         <div className="relative z-10 flex flex-col items-center gap-8 px-12">
           <div className="relative h-16 w-52">
-            <Image
-              src="/BRO-logo.webp"
-              alt="BRO Forum"
-              fill
-              className="object-contain brightness-0 invert"
-              priority
-            />
+            <Image src="/BRO-logo.webp" alt="BRO Forum" fill className="object-contain brightness-0 invert" priority />
           </div>
-
-          {/* Divider */}
           <div className="w-px h-16 bg-white/20" />
-
           <div className="text-center space-y-3">
             <h2 className="text-white font-bold text-2xl leading-snug">
               Business Relationship<br />Organisation
@@ -69,8 +62,6 @@ export default function AdminLoginPage() {
               Chennai's premier structured business referral network — growing businesses every Thursday.
             </p>
           </div>
-
-          {/* Stats */}
           <div className="flex gap-8 mt-4">
             {[{ v: "22+", l: "Members" }, { v: "4+", l: "Years" }, { v: "Weekly", l: "Meetings" }].map(s => (
               <div key={s.l} className="text-center">
@@ -80,17 +71,14 @@ export default function AdminLoginPage() {
             ))}
           </div>
         </div>
-
-        {/* Bottom label */}
         <p className="absolute bottom-6 text-white/20 text-xs">© 2026 BRO Forum</p>
       </div>
 
-      {/* Vertical divider */}
-      <div className="hidden lg:block w-px bg-white/10 relative z-10" style={{ background: "linear-gradient(to bottom, transparent, #01acac40, transparent)" }} />
+      {/* Divider */}
+      <div className="hidden lg:block w-px" style={{ background: "linear-gradient(to bottom, transparent, #01acac40, transparent)" }} />
 
       {/* ── Right Panel ── */}
       <div className="w-full lg:w-1/2 bg-[#001a6e] flex items-center justify-center p-8 relative overflow-hidden">
-        {/* Subtle glow */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-[#002284]/60 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#01acac]/10 rounded-full blur-3xl" />
 
@@ -114,10 +102,11 @@ export default function AdminLoginPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
 
-            {/* Username */}
             <div className="relative">
               <User size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" />
               <input
+                id="username"
+                name="username"
                 type="text"
                 required
                 autoComplete="username"
@@ -128,10 +117,11 @@ export default function AdminLoginPage() {
               />
             </div>
 
-            {/* Password */}
             <div className="relative">
               <Lock size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" />
               <input
+                id="password"
+                name="password"
                 type={showPw ? "text" : "password"}
                 required
                 autoComplete="current-password"
@@ -149,18 +139,16 @@ export default function AdminLoginPage() {
               </button>
             </div>
 
-            {/* Error */}
             {error && (
               <div className="flex items-center gap-2.5 bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-medium px-4 py-3 rounded-xl">
                 <AlertCircle size={14} className="shrink-0" /> {error}
               </div>
             )}
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#01acac] hover:bg-[#01acac]/90 disabled:opacity-60 text-white font-bold py-3.5 rounded-xl text-sm tracking-widest uppercase transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-[#01acac]/20"
+              className="w-full bg-[#01acac] hover:bg-[#01acac]/90 disabled:opacity-60 text-white font-bold py-3.5 rounded-xl text-sm tracking-widest uppercase transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#01acac]/20"
             >
               {loading ? (
                 <>
@@ -171,7 +159,6 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          {/* Footer */}
           <p className="text-center text-white/20 text-xs uppercase tracking-widest">
             Authorised Access Only
           </p>
