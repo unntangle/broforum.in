@@ -4,9 +4,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ParallaxHero from "@/components/ParallaxHero";
-import { Mail, Phone, MapPin, Clock, ArrowRight, Globe } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, ArrowRight, Globe, ChevronDown } from "lucide-react";
 import { useState, useTransition } from "react";
 import { submitEnquiry } from "@/app/admin/actions/enquiries";
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="py-5 cursor-pointer" onClick={() => setOpen((v) => !v)}>
+      <div className="flex items-center justify-between gap-4">
+        <h3 className={`text-base font-semibold transition-colors ${
+          open ? "text-[#002284]" : "text-[#002284]"
+        }`}>{q}</h3>
+        <ChevronDown
+          size={20}
+          className={`text-slate-400 shrink-0 transition-transform duration-300 ${
+            open ? "rotate-180 text-[#01acac]" : ""
+          }`}
+        />
+      </div>
+      {open && (
+        <p className="mt-3 text-slate-500 text-sm leading-relaxed pr-8">{a}</p>
+      )}
+    </div>
+  );
+}
 
 const faqs = [
   { q: "Can I attend a chapter meeting before joining?", a: "Absolutely. Every prospective member gets a complimentary guest pass to attend one chapter meeting. This helps you experience the format before committing." },
@@ -238,21 +260,13 @@ export default function ContactPage() {
       {/* FAQ */}
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#01acac] font-bold uppercase tracking-widest text-sm">Common Questions</span>
-            <h2 className="text-4xl font-bold text-[#002284] mt-4">FAQs</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-[#002284]">FAQs</h2>
+            <div className="w-16 h-1 bg-[#01acac] mx-auto mt-4 rounded-full" />
           </div>
-          <div className="space-y-4">
+          <div className="divide-y divide-slate-200">
             {faqs.map((faq, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }} viewport={{ once: true }}
-                className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-[#002284] mb-2 flex items-start gap-3">
-                  <span className="w-6 h-6 bg-[#01acac] rounded-lg flex items-center justify-center text-white text-xs font-black shrink-0 mt-0.5">{i + 1}</span>
-                  {faq.q}
-                </h3>
-                <p className="text-slate-600 text-sm leading-relaxed pl-9">{faq.a}</p>
-              </motion.div>
+              <FaqItem key={i} q={faq.q} a={faq.a} />
             ))}
           </div>
         </div>

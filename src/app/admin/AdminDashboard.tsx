@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useTransition, useRef } from "react";
+import Image from "next/image";
 import {
   Users, Calendar, Image as ImageIcon, MessageSquare,
   LayoutDashboard, Plus, Search, Trash2, Edit3,
-  X, Check, Bell, LogOut, Menu, Save,
+  X, Check, Bell, LogOut, Save,
   Upload, Tag, Phone, Mail, ChevronRight,
   Eye, Settings, ArrowUpRight,
 } from "lucide-react";
@@ -684,7 +685,6 @@ export default function AdminDashboard({ initialMembers, initialEvents, initialG
   initialMembers: MemberRow[]; initialEvents: EventRow[]; initialGallery: GalleryRow[]; initialEnquiries: EnquiryRow[];
 }) {
   const [section, setSection] = useState<Section>("dashboard");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [members] = useState(initialMembers);
   const [events] = useState(initialEvents);
   const [gallery] = useState(initialGallery);
@@ -705,29 +705,37 @@ export default function AdminDashboard({ initialMembers, initialEvents, initialG
       <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');`}</style>
 
       {/* ── Sidebar ── */}
-      <aside className={`${sidebarOpen ? "w-56" : "w-16"} shrink-0 bg-white border-r border-gray-100 flex flex-col transition-all duration-300`}>
+      <aside className="w-56 shrink-0 bg-[#002284] border-r border-[#001a6e] flex flex-col">
         {/* Logo */}
-        <div className={`flex items-center gap-3 px-4 py-5 border-b border-gray-50 ${!sidebarOpen && "justify-center"}`}>
-          <div className="w-8 h-8 rounded-xl bg-[#002284] flex items-center justify-center shrink-0">
-            <span className="text-white font-bold text-xs">B</span>
+        <div className="flex items-center px-4 py-4 border-b border-white/10">
+          <div className="relative h-12 w-44">
+            <Image
+              src="/BRO-logo.webp"
+              alt="BRO Forum"
+              fill
+              className="object-contain object-left brightness-0 invert"
+              priority
+            />
           </div>
-          {sidebarOpen && (
-            <div>
-              <p className="text-gray-900 font-bold text-sm leading-none">BRO Forum</p>
-              <p className="text-gray-400 text-[10px] mt-0.5">Admin Panel</p>
-            </div>
-          )}
         </div>
 
         {/* Nav */}
         <nav className="flex-1 px-2 py-4 space-y-0.5">
           {nav.map(item => (
             <button key={item.id} onClick={() => setSection(item.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${section === item.id ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"} ${!sidebarOpen && "justify-center"}`}>
+              className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-all border-b-2 rounded-lg ${
+                section === item.id
+                  ? "text-white border-[#01acac] bg-white/8"
+                  : "text-white/50 hover:text-white/80 border-transparent hover:bg-white/5"
+              }`}>
               <item.icon size={16} className="shrink-0" />
-              {sidebarOpen && <span className="flex-1 text-left">{item.label}</span>}
-              {sidebarOpen && item.badge !== undefined && item.badge > 0 && (
-                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${item.id === "enquiries" ? "bg-amber-100 text-amber-700" : "bg-gray-100 text-gray-500"}`}>
+              <span className="flex-1 text-left">{item.label}</span>
+              {item.badge !== undefined && item.badge > 0 && (
+                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                  item.id === "enquiries"
+                    ? "bg-amber-400 text-amber-900"
+                    : "bg-white/20 text-white"
+                }`}>
                   {item.badge}
                 </span>
               )}
@@ -736,32 +744,44 @@ export default function AdminDashboard({ initialMembers, initialEvents, initialG
         </nav>
 
         {/* Bottom */}
-        <div className={`px-2 py-3 border-t border-gray-50 space-y-0.5 ${!sidebarOpen && "flex flex-col items-center"}`}>
-          {sidebarOpen && (
-            <a href="/" target="_blank" className="flex items-center gap-3 px-3 py-2 rounded-xl text-gray-400 hover:bg-gray-50 hover:text-gray-600 text-xs font-medium transition-colors">
-              <ArrowUpRight size={15} /> View Website
-            </a>
-          )}
-          <button className={`flex items-center gap-3 px-3 py-2 rounded-xl text-gray-400 hover:bg-gray-50 hover:text-gray-600 text-xs font-medium transition-colors ${!sidebarOpen && "w-full justify-center"}`}>
-            <LogOut size={15} />{sidebarOpen && "Sign Out"}
-          </button>
+        <div className="px-2 py-3 border-t border-white/10">
+          <a href="/" target="_blank" className="flex items-center gap-3 px-3 py-2 rounded-xl text-white/50 hover:bg-white/10 hover:text-white text-xs font-medium transition-colors">
+            <ArrowUpRight size={15} /> View Website
+          </a>
         </div>
       </aside>
 
       {/* ── Main ── */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Topbar */}
-        <header className="shrink-0 bg-white border-b border-gray-100 px-6 py-3.5 flex items-center justify-between">
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-400 transition-colors">
-            <Menu size={16} />
-          </button>
+        <header className="shrink-0 bg-white border-b border-gray-100 px-6 py-3.5 flex items-center justify-end">
           <div className="flex items-center gap-3">
             <button className="relative w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-400 transition-colors">
               <Bell size={15} />
               {newEnq > 0 && <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-amber-500" />}
             </button>
-            <div className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center">
-              <span className="text-white font-semibold text-xs">A</span>
+            {/* Profile dropdown */}
+            <div className="relative group">
+              <button className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center cursor-pointer">
+                <span className="text-white font-semibold text-xs">A</span>
+              </button>
+              {/* Dropdown */}
+              <div className="absolute right-0 top-full mt-2 w-44 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+                <div className="px-4 py-3 border-b border-gray-50">
+                  <p className="text-xs font-semibold text-gray-900">Admin</p>
+                  <p className="text-[11px] text-gray-400 mt-0.5">BRO Forum</p>
+                </div>
+                <a href="/" target="_blank" className="flex items-center gap-2.5 px-4 py-2.5 text-xs text-gray-600 hover:bg-gray-50 transition-colors">
+                  <ArrowUpRight size={13} /> View Website
+                </a>
+                <button className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs text-red-500 hover:bg-red-50 transition-colors border-t border-gray-50"
+                  onClick={async () => {
+                    await fetch("/api/admin/logout", { method: "POST" });
+                    window.location.href = "/admin/login";
+                  }}>
+                  <LogOut size={13} /> Sign Out
+                </button>
+              </div>
             </div>
           </div>
         </header>
