@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useRef } from "react";
+import { useState, useTransition, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   Users, Calendar, Image as ImageIcon, MessageSquare,
@@ -684,13 +684,26 @@ type Section = "dashboard" | "members" | "events" | "gallery" | "enquiries";
 export default function AdminDashboard({ initialMembers, initialEvents, initialGallery, initialEnquiries }: {
   initialMembers: MemberRow[]; initialEvents: EventRow[]; initialGallery: GalleryRow[]; initialEnquiries: EnquiryRow[];
 }) {
-  const [section, setSection] = useState<Section>("dashboard");
+  const [section, setSection]               = useState<Section>("dashboard");
+  const [showNotif, setShowNotif]           = useState(false);
+  const notifRef                            = useRef<HTMLDivElement>(null);
   const [members] = useState(initialMembers);
   const [events] = useState(initialEvents);
   const [gallery] = useState(initialGallery);
   const [enquiries] = useState(initialEnquiries);
 
   const newEnq = enquiries.filter(e => e.status === "new").length;
+
+  // Close notification dropdown on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (notifRef.current && !notifRef.current.contains(e.target as Node)) {
+        setShowNotif(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   const nav: { id: Section; icon: React.ElementType; label: string; badge?: number }[] = [
     { id: "dashboard", icon: LayoutDashboard, label: "Overview" },
@@ -756,16 +769,90 @@ export default function AdminDashboard({ initialMembers, initialEvents, initialG
         {/* Topbar */}
         <header className="shrink-0 bg-white border-b border-gray-100 px-6 py-3.5 flex items-center justify-end">
           <div className="flex items-center gap-3">
-            <button className="relative w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-400 transition-colors">
-              <Bell size={15} />
-              {newEnq > 0 && <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-amber-500" />}
-            </button>
+
+            {/* Notification bell */}
+            <div className="relative" ref={notifRef}>
+              <button
+                onClick={() => setShowNotif(v => !v)}
+                className="relative w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-400 transition-colors"
+              >
+                <Bell size={15} />
+                {newEnq > 0 && (
+                  <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-500 border border-white" />
+                )}
+              </button>
+
+              {/* Notification dropdown */}
+              {showNotif && (
+                <div className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden">
+                  {/* Header */}
+                  <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 bg-gray-50/80">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-gray-900">Notifications</span>
+                      {newEnq > 0 && (
+                        <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">
+                          {newEnq} new
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => setShowNotif(false)}
+                      className="text-gray-400 hover:text-gray-600 transition-colors"
+                    >
+                      <X size={14} />
+                    </button>
+                  </div>
+
+                  {/* Notification list */}
+                  <div className="max-h-72 overflow-y-auto divide-y divide-gray-50">
+                    {enquiries.filter(e => e.status === "new").length === 0 ? (
+                      <div className="px-5 py-8 text-center">
+                        <Bell size={24} className="mx-auto text-gray-200 mb-2" />
+                        <p className="text-gray-400 text-sm">No new notifications</p>
+                      </div>
+                    ) : (
+                      enquiries
+                        .filter(e => e.status === "new")
+                        .map(e => (
+                          <button
+                            key={e.id}
+                            onClick={() => { setSection("enquiries"); setShowNotif(false); }}
+                            className="w-full flex items-start gap-3 px-5 py-3.5 hover:bg-gray-50 transition-colors text-left"
+                          >
+                            <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
+                              <span className="text-amber-700 font-bold text-xs">{e.name[0]}</span>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-semibold text-gray-900 truncate">{e.name}</p>
+                              <p className="text-xs text-gray-400 truncate">{e.interest}</p>
+                              <p className="text-[10px] text-gray-300 mt-0.5">
+                                {new Date(e.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                              </p>
+                            </div>
+                            <span className="shrink-0 w-2 h-2 rounded-full bg-amber-400 mt-2" />
+                          </button>
+                        ))
+                    )}
+                  </div>
+
+                  {/* Footer */}
+                  <div className="px-5 py-3 border-t border-gray-100 bg-gray-50/50">
+                    <button
+                      onClick={() => { setSection("enquiries"); setShowNotif(false); }}
+                      className="text-xs font-semibold text-[#002284] hover:text-[#01acac] transition-colors w-full text-center"
+                    >
+                      View all enquiries →
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Profile dropdown */}
             <div className="relative group">
               <button className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center cursor-pointer">
                 <span className="text-white font-semibold text-xs">A</span>
               </button>
-              {/* Dropdown */}
               <div className="absolute right-0 top-full mt-2 w-44 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
                 <div className="px-4 py-3 border-b border-gray-50">
                   <p className="text-xs font-semibold text-gray-900">Admin</p>
